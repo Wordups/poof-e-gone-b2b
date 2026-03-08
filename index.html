@@ -135,6 +135,16 @@
   .step-content h3 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; margin-bottom: 8px; }
   .step-content p { font-size: 14px; color: var(--muted); line-height: 1.7; }
   .step-badge { display: inline-block; background: rgba(61,220,92,0.1); color: var(--green); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; padding: 4px 10px; margin-top: 10px; text-transform: uppercase; }
+  .expandable { cursor: pointer; }
+  .step-header { display: flex; justify-content: space-between; align-items: center; }
+  .step-arrow { font-size: 24px; color: var(--green); font-weight: 300; transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
+  .expandable.open .step-arrow { transform: rotate(45deg); }
+  .step-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; opacity: 0; margin-top: 0; }
+  .expandable.open .step-body { max-height: 400px; opacity: 1; margin-top: 16px; }
+  .step-list { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .step-list li { font-size: 13px; color: var(--muted); display: flex; align-items: flex-start; gap: 10px; }
+  .step-list li::before { content: '→'; color: var(--green); font-family: 'DM Mono', monospace; font-size: 11px; flex-shrink: 0; margin-top: 2px; }
+  .step-cta { display: inline-block; margin-top: 16px; color: var(--green); font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 1px; text-decoration: none; border-bottom: 1px solid var(--green); padding-bottom: 2px; }
 
   /* COMPLIANCE */
   .compliance-box {
@@ -264,21 +274,68 @@
   <div class="section-tag">// Process</div>
   <h2>HOW IT<br>WORKS</h2>
   <div class="steps">
-    <div class="step">
+    <div class="step expandable" onclick="toggleStep(this)">
       <div class="step-num">01</div>
-      <div class="step-content"><h3>Submit Your Request</h3><p>Fill out our intake form. Tell us what you have, how many devices, and your preferred method. No sensitive data required.</p><span class="step-badge">Takes 2 minutes</span></div>
+      <div class="step-content">
+        <div class="step-header"><h3>Submit Your Request</h3><span class="step-arrow">+</span></div>
+        <div class="step-body">
+          <p>Fill out our intake form below. Tell us what you have, how many devices, and your preferred method. No sensitive data required — just the basics so we can prepare for your job.</p>
+          <ul class="step-list">
+            <li>Takes about 2 minutes to complete</li>
+            <li>No passwords or account numbers needed</li>
+            <li>We respond within one business day</li>
+          </ul>
+          <a href="#intake" class="step-cta" onclick="event.stopPropagation()">Go to Intake Form →</a>
+        </div>
+        <span class="step-badge">Takes 2 minutes</span>
+      </div>
     </div>
-    <div class="step">
+    <div class="step expandable" onclick="toggleStep(this)">
       <div class="step-num">02</div>
-      <div class="step-content"><h3>Pack & Send</h3><p>Box up your devices and drop them off at our Baltimore location, or we coordinate a courier pickup directly from your office.</p><span class="step-badge">We confirm within 24hr</span></div>
+      <div class="step-content">
+        <div class="step-header"><h3>Pack & Send</h3><span class="step-arrow">+</span></div>
+        <div class="step-body">
+          <p>Box up your devices and either drop them off at our Baltimore location or we coordinate a courier pickup directly from your office.</p>
+          <ul class="step-list">
+            <li>No minimum quantities — 1 device or 100, we handle it</li>
+            <li>Standard boxes work fine — no special packaging needed</li>
+            <li>Courier pickup available for larger batches</li>
+          </ul>
+        </div>
+        <span class="step-badge">We confirm within 24hr</span>
+      </div>
     </div>
-    <div class="step">
+    <div class="step expandable" onclick="toggleStep(this)">
       <div class="step-num">03</div>
-      <div class="step-content"><h3>We Process Everything</h3><p>Every device is assessed. Storage media is wiped or physically destroyed. Components are sorted for responsible recycling or refurbishment.</p><span class="step-badge">Secure facility</span></div>
+      <div class="step-content">
+        <div class="step-header"><h3>We Process Everything</h3><span class="step-arrow">+</span></div>
+        <div class="step-body">
+          <p>Every device is assessed at our secure Baltimore facility. Storage media is wiped using industry-standard methods or physically destroyed.</p>
+          <ul class="step-list">
+            <li>Hard drives and SSDs wiped or shredded</li>
+            <li>Usable components sorted for responsible refurbishment</li>
+            <li>Non-recoverable parts recycled properly</li>
+            <li>Chain of custody maintained throughout</li>
+          </ul>
+        </div>
+        <span class="step-badge">Secure facility</span>
+      </div>
     </div>
-    <div class="step">
+    <div class="step expandable" onclick="toggleStep(this)">
       <div class="step-num">04</div>
-      <div class="step-content"><h3>Receive Your Certificate</h3><p>We issue a Certificate of Data Destruction for every job. You get documentation for your records, your compliance team, and your clients.</p><span class="step-badge">COD issued same day</span></div>
+      <div class="step-content">
+        <div class="step-header"><h3>Receive Your Certificate</h3><span class="step-arrow">+</span></div>
+        <div class="step-body">
+          <p>We issue a Certificate of Data Destruction for every job. This is your official documentation that data was handled correctly and responsibly.</p>
+          <ul class="step-list">
+            <li>Suitable for HIPAA, legal, and financial compliance records</li>
+            <li>Issued per device or per batch — your preference</li>
+            <li>Delivered same day as job completion</li>
+            <li>Keep it on file for audits or client reassurance</li>
+          </ul>
+        </div>
+        <span class="step-badge">COD issued same day</span>
+      </div>
     </div>
   </div>
 </section>
@@ -369,6 +426,12 @@
 </footer>
 
 <script>
+  function toggleStep(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.expandable').forEach(s => s.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+
   async function submitForm() {
     const required = ['company','name','email','phone'];
     let valid = true;
@@ -378,11 +441,24 @@
       else { el.style.borderColor = '#222'; }
     });
     if (!valid) return;
+    const data = {
+      company: document.getElementById('company').value,
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      industry: document.getElementById('industry').value,
+      quantity: document.getElementById('quantity').value,
+      method: document.getElementById('method').value,
+      devices: document.getElementById('devices').value,
+      notes: document.getElementById('notes').value,
+      submitted: new Date().toISOString()
+    };
     const webhookUrl = 'https://unstylish-traumatically-xiomara.ngrok-free.dev/webhook/6e6f6c6b-358c-4c11-b252-4134c68e11b0';
     try {
       await fetch(webhookUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(data)
       });
     } catch (e) { console.error('Webhook error:', e); }
