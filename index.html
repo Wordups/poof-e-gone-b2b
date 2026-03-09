@@ -474,7 +474,7 @@
       <p style="color: var(--muted); font-size: 15px;">We'll review your request and follow up within one business day.</p>
     </div>
 
-    <div id="intakeForm" name="poof-e-gone-intake" netlify>
+    <form id="intakeForm" name="poof-e-gone-intake" data-netlify="true" onsubmit="return false;">
       <input type="hidden" name="form-name" value="poof-e-gone-intake" />
       <div class="form-grid">
         <div class="form-group"><label>Company Name</label><input type="text" id="company" placeholder="Acme Corp" /></div>
@@ -511,9 +511,9 @@
         <div class="form-group full"><label>Device Types (optional)</label><input type="text" id="devices" placeholder="e.g. 10 laptops, 5 desktops, 3 hard drives..." /></div>
         <div class="form-group full"><label>Additional Notes</label><textarea id="notes" placeholder="Any special requirements, timeline, or questions..."></textarea></div>
       </div>
-      <button class="form-submit" onclick="submitForm()">Submit Pickup Request →</button>
+      <button class="form-submit" type="button" onclick="submitForm()">Submit Pickup Request →</button>
       <p class="form-note">🔒 We do not store sensitive data. This form is for service scheduling only.</p>
-    </div>
+    </form>
 
     <div class="form-success" id="formSuccess">
       <div class="check">✅</div>
