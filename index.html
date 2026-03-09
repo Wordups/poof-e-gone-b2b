@@ -214,6 +214,109 @@
     .divider { margin: 0 24px; }
     .step { grid-template-columns: 56px 1fr; gap: 16px; }
   }
+
+  /* CHATBOT */
+  .chat-bubble {
+    position: fixed; bottom: 28px; right: 28px; z-index: 1000;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--green); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(61,220,92,0.4);
+    transition: transform 0.2s, background 0.2s;
+    font-size: 22px;
+  }
+  .chat-bubble:hover { transform: scale(1.08); background: var(--green-dim); }
+  .chat-bubble .bubble-close { display: none; font-size: 20px; color: var(--black); font-weight: bold; }
+  .chat-bubble.open .bubble-icon { display: none; }
+  .chat-bubble.open .bubble-close { display: block; }
+
+  .chat-ping {
+    position: fixed; bottom: 72px; right: 28px; z-index: 999;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--white); font-size: 13px; padding: 10px 16px;
+    max-width: 220px; border-radius: 2px; line-height: 1.5;
+    animation: fadeUp 0.5s 2s both;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .chat-ping::after {
+    content: ''; position: absolute; bottom: -6px; right: 20px;
+    width: 10px; height: 10px; background: var(--card);
+    border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    transform: rotate(45deg);
+  }
+  .chat-ping.hidden { display: none; }
+
+  .chat-window {
+    position: fixed; bottom: 96px; right: 28px; z-index: 999;
+    width: 360px; height: 500px;
+    background: var(--dark); border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    transform: translateY(20px); opacity: 0; pointer-events: none;
+    transition: all 0.3s ease;
+  }
+  .chat-window.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+
+  .chat-header {
+    background: var(--card); border-bottom: 1px solid var(--border);
+    padding: 16px 20px; display: flex; align-items: center; gap: 12px;
+  }
+  .chat-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--green); display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .chat-header-info { flex: 1; }
+  .chat-header-name { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; }
+  .chat-header-status { font-size: 11px; color: var(--green); font-family: 'DM Mono', monospace; }
+
+  .chat-messages {
+    flex: 1; overflow-y: auto; padding: 16px; display: flex;
+    flex-direction: column; gap: 12px;
+    scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+  }
+
+  .chat-msg { display: flex; gap: 8px; align-items: flex-end; }
+  .chat-msg.user { flex-direction: row-reverse; }
+
+  .chat-msg-bubble {
+    max-width: 80%; padding: 10px 14px; font-size: 13px; line-height: 1.5;
+    border-radius: 2px;
+  }
+  .chat-msg.bot .chat-msg-bubble { background: var(--card); color: var(--white); border: 1px solid var(--border); }
+  .chat-msg.user .chat-msg-bubble { background: var(--green); color: var(--black); font-weight: 500; }
+
+  .chat-typing { display: flex; gap: 4px; align-items: center; padding: 12px 14px; background: var(--card); border: 1px solid var(--border); width: fit-content; }
+  .chat-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: typing 1.2s infinite; }
+  .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing { 0%, 60%, 100% { opacity: 0.3; transform: scale(1); } 30% { opacity: 1; transform: scale(1.2); } }
+
+  .chat-input-area {
+    border-top: 1px solid var(--border); padding: 12px 16px;
+    display: flex; gap: 8px; align-items: center;
+  }
+  .chat-input {
+    flex: 1; background: var(--card); border: 1px solid var(--border);
+    color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px;
+    padding: 10px 14px; outline: none; resize: none; height: 40px;
+    transition: border-color 0.2s;
+  }
+  .chat-input:focus { border-color: var(--green); }
+  .chat-send {
+    background: var(--green); color: var(--black); border: none;
+    width: 40px; height: 40px; cursor: pointer; font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .chat-send:hover { background: var(--green-dim); }
+
+  @media (max-width: 768px) {
+    .chat-window { width: calc(100vw - 32px); right: 16px; bottom: 88px; }
+    .chat-bubble { right: 16px; bottom: 16px; }
+    .chat-ping { right: 16px; }
+  }
+
 </style>
 </head>
 <body>
@@ -226,7 +329,7 @@
 <section class="hero">
   <div class="hero-tag">Baltimore's B2B Electronics Disposal Partner</div>
   <h1>YOUR OLD <span class="accent">TECH.</span><br>GONE FOR GOOD.</h1>
-  <p class="hero-sub">We pick up your unwanted business electronics, destroy your data securely, and hand you a certificate. No minimum quantities. No data risk. No hassle.</p>
+  <p class="hero-sub">We come to you. Schedule a courier pickup for your unwanted business electronics, we destroy your data securely, and hand you a certificate. No minimum quantities. No data risk. No hassle.</p>
   <div class="hero-actions">
     <a href="#intake" class="btn-primary">Schedule a Pickup</a>
     <a href="#how-it-works" class="btn-ghost">See How It Works</a>
@@ -237,12 +340,12 @@
   <div class="ticker-inner">
     <span>Certified Data Destruction <span class="ticker-dot">◆</span></span>
     <span>Certificate of Disposal Provided <span class="ticker-dot">◆</span></span>
-    <span>Drop-Off or Courier Pickup <span class="ticker-dot">◆</span></span>
+    <span>Courier Pickup Scheduled For You <span class="ticker-dot">◆</span></span>
     <span>No Minimum Quantities <span class="ticker-dot">◆</span></span>
     <span>Serving Baltimore &amp; Surrounding Counties <span class="ticker-dot">◆</span></span>
     <span>Certified Data Destruction <span class="ticker-dot">◆</span></span>
     <span>Certificate of Disposal Provided <span class="ticker-dot">◆</span></span>
-    <span>Drop-Off or Courier Pickup <span class="ticker-dot">◆</span></span>
+    <span>Courier Pickup Scheduled For You <span class="ticker-dot">◆</span></span>
     <span>No Minimum Quantities <span class="ticker-dot">◆</span></span>
     <span>Serving Baltimore &amp; Surrounding Counties <span class="ticker-dot">◆</span></span>
   </div>
@@ -350,7 +453,7 @@
     </div>
     <div>
       <ul class="cert-list">
-        <li>Chain of custody documented from pickup to destruction</li>
+        <li>Courier pickup scheduled directly from your office or site</li>
         <li>Physical destruction available for hard drives and SSDs</li>
         <li>Certificate issued per device or per batch</li>
         <li>Suitable for HIPAA, legal, and financial compliance documentation</li>
@@ -371,7 +474,8 @@
       <p style="color: var(--muted); font-size: 15px;">We'll review your request and follow up within one business day.</p>
     </div>
 
-    <div id="intakeForm">
+    <div id="intakeForm" name="poof-e-gone-intake" netlify>
+      <input type="hidden" name="form-name" value="poof-e-gone-intake" />
       <div class="form-grid">
         <div class="form-group"><label>Company Name</label><input type="text" id="company" placeholder="Acme Corp" /></div>
         <div class="form-group"><label>Your Name</label><input type="text" id="name" placeholder="Jane Smith" /></div>
@@ -396,12 +500,12 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Preferred Method</label>
+          <label>Timeline</label>
           <select id="method">
-            <option value="" disabled selected>Drop-off or courier?</option>
-            <option>I will drop off the devices</option>
-            <option>I need courier pickup arranged</option>
-            <option>Not sure yet</option>
+            <option value="" disabled selected>Select timing</option>
+            <option>As soon as possible</option>
+            <option>Within the next week</option>
+            <option>Flexible / just getting a quote</option>
           </select>
         </div>
         <div class="form-group full"><label>Device Types (optional)</label><input type="text" id="devices" placeholder="e.g. 10 laptops, 5 desktops, 3 hard drives..." /></div>
@@ -441,6 +545,7 @@
       else { el.style.borderColor = '#222'; }
     });
     if (!valid) return;
+
     const data = {
       company: document.getElementById('company').value,
       name: document.getElementById('name').value,
@@ -448,23 +553,52 @@
       phone: document.getElementById('phone').value,
       industry: document.getElementById('industry').value,
       quantity: document.getElementById('quantity').value,
-      method: document.getElementById('method').value,
+      timeline: document.getElementById('method').value,
       devices: document.getElementById('devices').value,
       notes: document.getElementById('notes').value,
       submitted: new Date().toISOString()
     };
-    const webhookUrl = 'https://unstylish-traumatically-xiomara.ngrok-free.dev/webhook/6e6f6c6b-358c-4c11-b252-4134c68e11b0';
+
+    // Submit to Netlify Forms
+    const formData = new FormData();
+    formData.append('form-name', 'poof-e-gone-intake');
+    Object.entries(data).forEach(([k, v]) => formData.append(k, v));
+
     try {
-      await fetch(webhookUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(data)
-      });
-    } catch (e) { console.error('Webhook error:', e); }
+      await fetch('/', { method: 'POST', body: formData });
+    } catch (e) { console.error('Form error:', e); }
+
     document.getElementById('intakeForm').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
   }
 </script>
+
+<!-- CHAT PING -->
+<div class="chat-ping" id="chatPing">
+  👋 Need help? Ask us anything about pickup & data destruction.
+</div>
+
+<!-- CHAT BUBBLE -->
+<button class="chat-bubble" id="chatBubble" onclick="toggleChat()">
+  <span class="bubble-icon">💬</span>
+  <span class="bubble-close">✕</span>
+</button>
+
+<!-- CHAT WINDOW -->
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-avatar">♻️</div>
+    <div class="chat-header-info">
+      <div class="chat-header-name">Poof E Gone</div>
+      <div class="chat-header-status">● Online now</div>
+    </div>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input-area">
+    <textarea class="chat-input" id="chatInput" placeholder="Ask anything..." rows="1" onkeydown="handleKey(event)"></textarea>
+    <button class="chat-send" onclick="sendMessage()">→</button>
+  </div>
+</div>
+
 </body>
 </html>
