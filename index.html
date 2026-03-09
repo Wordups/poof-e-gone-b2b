@@ -477,13 +477,13 @@
     <form id="intakeForm" name="poof-e-gone-intake" data-netlify="true" onsubmit="return false;">
       <input type="hidden" name="form-name" value="poof-e-gone-intake" />
       <div class="form-grid">
-        <div class="form-group"><label>Company Name</label><input type="text" id="company" placeholder="Acme Corp" /></div>
-        <div class="form-group"><label>Your Name</label><input type="text" id="name" placeholder="Jane Smith" /></div>
-        <div class="form-group"><label>Email Address</label><input type="email" id="email" placeholder="jane@acmecorp.com" /></div>
-        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="(410) 000-0000" /></div>
+        <div class="form-group"><label>Company Name</label><input type="text" id="company" name="company" placeholder="Acme Corp" /></div>
+        <div class="form-group"><label>Your Name</label><input type="text" id="name" name="name" placeholder="Jane Smith" /></div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="email" name="email" placeholder="jane@acmecorp.com" /></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" name="phone" placeholder="(410) 000-0000" /></div>
         <div class="form-group full">
           <label>Industry / Business Type</label>
-          <select id="industry">
+          <select id="industry" name="industry">
             <option value="" disabled selected>Select your industry</option>
             <option>Law Firm</option><option>Medical / Healthcare</option>
             <option>Accounting / Finance</option><option>Property Management</option>
@@ -493,7 +493,7 @@
         </div>
         <div class="form-group">
           <label>Approx. Number of Devices</label>
-          <select id="quantity">
+          <select id="quantity" name="quantity">
             <option value="" disabled selected>Select range</option>
             <option>1–5 devices</option><option>6–20 devices</option>
             <option>21–50 devices</option><option>50+ devices</option>
@@ -501,15 +501,15 @@
         </div>
         <div class="form-group">
           <label>Timeline</label>
-          <select id="method">
+          <select id="method" name="method">
             <option value="" disabled selected>Select timing</option>
             <option>As soon as possible</option>
             <option>Within the next week</option>
             <option>Flexible / just getting a quote</option>
           </select>
         </div>
-        <div class="form-group full"><label>Device Types (optional)</label><input type="text" id="devices" placeholder="e.g. 10 laptops, 5 desktops, 3 hard drives..." /></div>
-        <div class="form-group full"><label>Additional Notes</label><textarea id="notes" placeholder="Any special requirements, timeline, or questions..."></textarea></div>
+        <div class="form-group full"><label>Device Types (optional)</label><input type="text" id="devices" name="devices" placeholder="e.g. 10 laptops, 5 desktops, 3 hard drives..." /></div>
+        <div class="form-group full"><label>Additional Notes</label><textarea id="notes" name="notes" placeholder="Any special requirements, timeline, or questions..."></textarea></div>
       </div>
       <button class="form-submit" type="button" onclick="submitForm()">Submit Pickup Request →</button>
       <p class="form-note">🔒 We do not store sensitive data. This form is for service scheduling only.</p>
