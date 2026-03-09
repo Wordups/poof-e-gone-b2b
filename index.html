@@ -530,12 +530,14 @@
 </footer>
 
 <script>
+  // STEPS
   function toggleStep(el) {
     const isOpen = el.classList.contains('open');
     document.querySelectorAll('.expandable').forEach(s => s.classList.remove('open'));
     if (!isOpen) el.classList.add('open');
   }
 
+  // INTAKE FORM
   async function submitForm() {
     const required = ['company','name','email','phone'];
     let valid = true;
@@ -545,7 +547,6 @@
       else { el.style.borderColor = '#222'; }
     });
     if (!valid) return;
-
     const data = {
       company: document.getElementById('company').value,
       name: document.getElementById('name').value,
@@ -558,19 +559,100 @@
       notes: document.getElementById('notes').value,
       submitted: new Date().toISOString()
     };
-
-    // Submit to Netlify Forms
     const formData = new FormData();
     formData.append('form-name', 'poof-e-gone-intake');
     Object.entries(data).forEach(([k, v]) => formData.append(k, v));
-
-    try {
-      await fetch('/', { method: 'POST', body: formData });
-    } catch (e) { console.error('Form error:', e); }
-
+    try { await fetch('/', { method: 'POST', body: formData }); } catch (e) { console.error('Form error:', e); }
     document.getElementById('intakeForm').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
   }
+
+  // CHATBOT
+  const SYSTEM_PROMPT = "You are a helpful assistant for Poof E Gone, a Baltimore-based business electronics pickup and secure data destruction service. We pick up via courier — customer never goes anywhere. Courier included for Baltimore metro. We serve law firms, medical offices, accounting firms, property managers, IT departments. Services: data wiping, physical destruction, recycling, PC repair. We issue Certificates of Data Destruction. No minimum quantity. 24hr turnaround. Phone: (202) 596-1361. Keep responses 2-4 sentences. Never make up pricing — direct to intake form for quotes.";
+
+  let chatHistory = [];
+  let chatOpen = false;
+
+  function toggleChat() {
+    chatOpen = !chatOpen;
+    document.getElementById('chatWindow').classList.toggle('open', chatOpen);
+    document.getElementById('chatBubble').classList.toggle('open', chatOpen);
+    document.getElementById('chatPing').classList.add('hidden');
+    if (chatOpen && chatHistory.length === 0) {
+      setTimeout(function() {
+        addBotMessage("Hi! I'm the Poof E Gone assistant. I can answer questions about our pickup and data destruction service. What can I help you with?");
+      }, 400);
+    }
+  }
+
+  function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  }
+
+  function addBotMessage(text) {
+    var msgs = document.getElementById('chatMessages');
+    var msg = document.createElement('div');
+    msg.className = 'chat-msg bot';
+    msg.innerHTML = '<div class="chat-msg-bubble">' + text + '</div>';
+    msgs.appendChild(msg);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function addUserMessage(text) {
+    var msgs = document.getElementById('chatMessages');
+    var msg = document.createElement('div');
+    msg.className = 'chat-msg user';
+    msg.innerHTML = '<div class="chat-msg-bubble">' + text + '</div>';
+    msgs.appendChild(msg);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function showTyping() {
+    var msgs = document.getElementById('chatMessages');
+    var t = document.createElement('div');
+    t.className = 'chat-msg bot';
+    t.id = 'typingIndicator';
+    t.innerHTML = '<div class="chat-typing"><span></span><span></span><span></span></div>';
+    msgs.appendChild(t);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function removeTyping() {
+    var t = document.getElementById('typingIndicator');
+    if (t) t.remove();
+  }
+
+  async function sendMessage() {
+    var input = document.getElementById('chatInput');
+    var text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    addUserMessage(text);
+    chatHistory.push({ role: 'user', content: text });
+    showTyping();
+    try {
+      var res = await fetch('/.netlify/functions/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: chatHistory })
+      });
+      var data = await res.json();
+      var reply = data.reply;
+      chatHistory.push({ role: 'assistant', content: reply });
+      removeTyping();
+      addBotMessage(reply);
+    } catch(e) {
+      removeTyping();
+      addBotMessage("Sorry, connection issue. Please call (202) 596-1361.");
+    }
+  }
+
+  setTimeout(function() {
+    if (!chatOpen) {
+      var ping = document.getElementById('chatPing');
+      if (ping) ping.style.display = 'block';
+    }
+  }, 3000);
 </script>
 
 <!-- CHAT PING -->
