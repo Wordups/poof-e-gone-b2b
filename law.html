@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poof E Gone — Secure IT Disposal for Law Firms · Baltimore</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0e8; --dark: #ede8dc; --card: #ffffff; --border: #d8d0c0;
+    --green: #1a7a2e; --green-dim: #145f23;
+    --accent: #e84e0f; --accent-dim: #c43c08;
+    --white: #111111; --muted: #7a7060; --shadow: rgba(0,0,0,0.08);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; border-bottom: 1px solid var(--border); background: rgba(245,240,232,0.96); backdrop-filter: blur(12px); }
+  .nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--green); }
+  .nav-logo-text span { color: var(--white); }
+  .nav-back { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+  .nav-back:hover { color: var(--green); }
+  .nav-cta { background: var(--accent); color: #fff; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 1px; padding: 10px 22px; border: none; cursor: pointer; text-transform: uppercase; transition: background 0.2s; box-shadow: 0 2px 8px rgba(232,78,15,0.3); }
+  .nav-cta:hover { background: var(--accent-dim); }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 48px 80px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26,122,46,0.06) 0%, transparent 70%); pointer-events: none; }
+  .hero-tag { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--green); text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+  .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--green); }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 8vw, 110px); line-height: 0.92; letter-spacing: 2px; max-width: 900px; margin-bottom: 32px; color: var(--white); }
+  h1 .accent-green { color: var(--green); }
+  h1 .accent-red { color: var(--accent); }
+  .hero-sub { font-size: 18px; color: var(--muted); max-width: 560px; margin-bottom: 14px; font-weight: 300; line-height: 1.7; }
+  .hero-text-cta { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 1px; margin-bottom: 40px; }
+  .hero-text-cta span { color: var(--white); font-weight: 600; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary { background: var(--accent); color: #fff; font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 1px; padding: 16px 32px; border: none; cursor: pointer; text-transform: uppercase; text-decoration: none; display: inline-block; transition: all 0.2s; box-shadow: 0 4px 16px rgba(232,78,15,0.25); }
+  .btn-primary:hover { background: var(--accent-dim); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--white); font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 1px; padding: 16px 32px; border: 2px solid var(--border); cursor: pointer; text-transform: uppercase; text-decoration: none; display: inline-block; transition: all 0.2s; }
+  .btn-ghost:hover { border-color: var(--green); color: var(--green); }
+
+  .ticker { background: var(--white); padding: 12px 0; overflow: hidden; white-space: nowrap; }
+  .ticker-inner { display: inline-block; animation: ticker 28s linear infinite; }
+  .ticker span { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--bg); letter-spacing: 2px; text-transform: uppercase; padding: 0 28px; }
+  .ticker-dot { color: rgba(245,240,232,0.3); }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--border); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .stat-item { background: var(--bg); padding: 36px 28px; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--green); line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  section { padding: 96px 48px; position: relative; }
+  .section-tag { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; }
+  h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 68px); line-height: 1; letter-spacing: 1px; margin-bottom: 24px; color: var(--white); }
+
+  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border); margin-top: 56px; }
+  .pain-card { background: var(--card); padding: 36px 28px; border-bottom: 3px solid transparent; transition: all 0.2s; }
+  .pain-card:hover { background: #faf6ee; border-bottom-color: var(--accent); }
+  .pain-icon { font-size: 28px; margin-bottom: 14px; }
+  .pain-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; margin-bottom: 8px; color: var(--white); }
+  .pain-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  .offer-box { background: var(--white); color: var(--bg); padding: 96px 48px; }
+  .offer-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .offer-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; margin-bottom: 16px; color: var(--bg); }
+  .offer-title .amber { color: var(--accent); }
+  .offer-desc { font-size: 16px; color: rgba(245,240,232,0.7); line-height: 1.7; margin-bottom: 28px; }
+  .offer-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .offer-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(245,240,232,0.8); }
+  .offer-list li::before { content: '✓'; color: var(--accent); font-family: 'DM Mono', monospace; font-size: 12px; flex-shrink: 0; margin-top: 3px; font-weight: 700; }
+  .offer-list li strong { color: var(--bg); }
+
+  .steps { margin-top: 56px; display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+  .step { background: var(--card); display: grid; grid-template-columns: 80px 1fr; gap: 32px; align-items: start; padding: 36px 28px; transition: background 0.2s; }
+  .step:hover { background: #faf6ee; }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--border); line-height: 1; }
+  .step-content h3 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; margin-bottom: 8px; color: var(--white); }
+  .step-content p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .step-badge { display: inline-block; background: rgba(26,122,46,0.1); color: var(--green); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; padding: 4px 10px; margin-top: 10px; text-transform: uppercase; border: 1px solid rgba(26,122,46,0.2); }
+
+  .cta-section { background: var(--white); padding: 80px 48px; text-align: center; }
+  .cta-section h2 { color: var(--bg); margin-bottom: 16px; }
+  .cta-section p { color: rgba(245,240,232,0.7); font-size: 18px; max-width: 540px; margin: 0 auto 36px; font-weight: 300; line-height: 1.7; }
+  .btn-accent { background: var(--accent); color: #fff; font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 1px; padding: 16px 36px; border: none; cursor: pointer; text-transform: uppercase; transition: all 0.2s; display: inline-block; box-shadow: 0 4px 16px rgba(232,78,15,0.3); }
+  .btn-accent:hover { background: var(--accent-dim); transform: translateY(-1px); }
+
+  .divider { height: 1px; background: var(--border); margin: 0 48px; }
+
+  .form-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(17,17,17,0.5); z-index: 998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .form-overlay.open { opacity: 1; pointer-events: all; }
+  .form-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 480px; max-width: 100vw; background: var(--card); z-index: 999; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; box-shadow: -8px 0 40px rgba(0,0,0,0.12); display: flex; flex-direction: column; }
+  .form-panel.open { transform: translateX(0); }
+  .form-panel-header { padding: 32px 32px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; background: var(--bg); position: sticky; top: 0; z-index: 1; }
+  .form-panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--white); }
+  .form-panel-sub { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-top: 4px; }
+  .form-close { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 18px; cursor: pointer; padding: 8px 12px; transition: all 0.2s; line-height: 1; }
+  .form-close:hover { border-color: var(--accent); color: var(--accent); }
+  .form-body { padding: 28px 32px 40px; flex: 1; }
+  .form-grid { display: flex; flex-direction: column; gap: 18px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+  input, select, textarea { background: var(--bg); border: 1px solid var(--border); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 12px 14px; outline: none; transition: border-color 0.2s; width: 100%; -webkit-appearance: none; }
+  input:focus, select:focus, textarea:focus { border-color: var(--green); background: #fff; }
+  input::placeholder, textarea::placeholder { color: #bbb; }
+  select option { background: var(--card); }
+  textarea { resize: vertical; min-height: 100px; }
+  .form-submit { width: 100%; background: var(--accent); color: #fff; font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 2px; padding: 16px; border: none; cursor: pointer; text-transform: uppercase; transition: background 0.2s; margin-top: 8px; box-shadow: 0 4px 16px rgba(232,78,15,0.25); }
+  .form-submit:hover { background: var(--accent-dim); }
+  .form-note { margin-top: 12px; font-size: 11px; color: var(--muted); text-align: center; font-family: 'DM Mono', monospace; }
+  .form-success-panel { display: none; text-align: center; padding: 60px 32px; }
+  .form-success-panel .check { font-size: 48px; margin-bottom: 20px; }
+  .form-success-panel h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--green); margin-bottom: 12px; }
+  .form-success-panel p { color: var(--muted); font-size: 15px; line-height: 1.6; }
+
+  footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: var(--dark); }
+  .footer-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: var(--green); }
+  .footer-logo-text span { color: var(--white); }
+  .footer-info { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-tag { animation: fadeUp 0.6s ease both; }
+  h1 { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
+
+  .chat-bubble { position: fixed; bottom: 28px; right: 28px; z-index: 997; width: 54px; height: 54px; border-radius: 50%; background: var(--accent); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(232,78,15,0.4); transition: transform 0.2s, background 0.2s; font-size: 22px; }
+  .chat-bubble:hover { transform: scale(1.08); background: var(--accent-dim); }
+  .chat-bubble .bubble-close { display: none; font-size: 18px; color: #fff; font-weight: bold; }
+  .chat-bubble.open .bubble-icon { display: none; }
+  .chat-bubble.open .bubble-close { display: block; }
+  .chat-window { position: fixed; bottom: 94px; right: 28px; z-index: 996; width: 340px; height: 480px; background: var(--card); border: 1px solid var(--border); display: flex; flex-direction: column; box-shadow: 0 8px 40px rgba(0,0,0,0.15); transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.3s ease; }
+  .chat-window.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+  .chat-header { background: var(--white); padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+  .chat-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(245,240,232,0.2); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .chat-header-name { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; color: var(--bg); }
+  .chat-header-status { font-size: 10px; color: rgba(245,240,232,0.7); font-family: 'DM Mono', monospace; }
+  .chat-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; background: var(--bg); scrollbar-width: thin; }
+  .chat-msg { display: flex; gap: 6px; align-items: flex-end; }
+  .chat-msg.user { flex-direction: row-reverse; }
+  .chat-msg-bubble { max-width: 80%; padding: 9px 12px; font-size: 13px; line-height: 1.5; }
+  .chat-msg.bot .chat-msg-bubble { background: var(--card); color: var(--white); border: 1px solid var(--border); }
+  .chat-msg.user .chat-msg-bubble { background: var(--accent); color: #fff; }
+  .chat-typing { display: flex; gap: 4px; align-items: center; padding: 10px 12px; background: var(--card); border: 1px solid var(--border); width: fit-content; }
+  .chat-typing span { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); animation: typing 1.2s infinite; }
+  .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing { 0%, 60%, 100% { opacity: 0.3; transform: scale(1); } 30% { opacity: 1; transform: scale(1.2); } }
+  .chat-input-area { border-top: 1px solid var(--border); padding: 10px 12px; display: flex; gap: 8px; align-items: center; background: var(--card); }
+  .chat-input { flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 9px 12px; outline: none; resize: none; height: 38px; transition: border-color 0.2s; }
+  .chat-input:focus { border-color: var(--green); }
+  .chat-send { background: var(--accent); color: #fff; border: none; width: 38px; height: 38px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; flex-shrink: 0; }
+  .chat-send:hover { background: var(--accent-dim); }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    section { padding: 64px 20px; }
+    .offer-box { padding: 64px 20px; }
+    .offer-inner { grid-template-columns: 1fr; gap: 32px; }
+    .cta-section { padding: 60px 20px; }
+    footer { padding: 28px 20px; flex-direction: column; align-items: flex-start; }
+    .divider { margin: 0 20px; }
+    .step { grid-template-columns: 52px 1fr; gap: 16px; }
+    .form-panel { width: 100vw; }
+    .chat-window { width: calc(100vw - 24px); right: 12px; }
+    .chat-bubble { right: 12px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo-text">POOF E <span>GONE</span></div>
+  <a href="index.html" class="nav-back">← All Services</a>
+  <button class="nav-cta" onclick="openForm()">Schedule Pickup</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">For Law Firms · Baltimore Metro</div>
+  <h1>CLIENT DATA<br>ON <span class="accent-red">OLD DRIVES</span><br>IS A <span class="accent-green">LIABILITY.</span><br>WE REMOVE IT.</h1>
+  <p class="hero-sub">Retired laptops, old servers, and surplus workstations sitting in your storage room hold confidential client files. We pick them up, destroy the data, and issue documentation — so your firm is covered.</p>
+  <p class="hero-text-cta">Fast quote via text: <span>(202) 596-1361</span></p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="openForm()">Schedule Secure Pickup</button>
+    <a href="#how" class="btn-ghost">See How It Works</a>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Confidential Data Destruction <span class="ticker-dot">◆</span></span>
+    <span>Certificate of Destruction Issued Same Day <span class="ticker-dot">◆</span></span>
+    <span>We Come To Your Office <span class="ticker-dot">◆</span></span>
+    <span>No Drop-Off Required <span class="ticker-dot">◆</span></span>
+    <span>Bar Compliance Documentation <span class="ticker-dot">◆</span></span>
+    <span>Cybersecurity-Certified Operator <span class="ticker-dot">◆</span></span>
+    <span>No Minimum Device Count <span class="ticker-dot">◆</span></span>
+    <span>Confidential Data Destruction <span class="ticker-dot">◆</span></span>
+    <span>Certificate of Destruction Issued Same Day <span class="ticker-dot">◆</span></span>
+    <span>We Come To Your Office <span class="ticker-dot">◆</span></span>
+    <span>No Drop-Off Required <span class="ticker-dot">◆</span></span>
+    <span>Bar Compliance Documentation <span class="ticker-dot">◆</span></span>
+    <span>Cybersecurity-Certified Operator <span class="ticker-dot">◆</span></span>
+    <span>No Minimum Device Count <span class="ticker-dot">◆</span></span>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat-item"><div class="stat-num">COD</div><div class="stat-label">Certificate Per Device</div></div>
+  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Secure Destruction</div></div>
+  <div class="stat-item"><div class="stat-num">0</div><div class="stat-label">Minimum Device Count</div></div>
+  <div class="stat-item"><div class="stat-num">24HR</div><div class="stat-label">Turnaround Available</div></div>
+</div>
+
+<section>
+  <div class="section-tag">// The Problem</div>
+  <h2>WHAT'S SITTING<br>IN YOUR <span style="color:var(--accent)">STORAGE</span><br>RIGHT NOW</h2>
+  <p style="color:var(--muted); font-size:16px; max-width:560px;">Law firms rotate equipment on 3–5 year cycles. The old devices don't disappear — they accumulate. And every one of them is a liability.</p>
+  <div class="pain-grid">
+    <div class="pain-card">
+      <div class="pain-icon">💼</div>
+      <div class="pain-title">Retired Attorney Laptops</div>
+      <p class="pain-desc">Case files, client correspondence, privileged work product — all sitting on drives that got replaced but never wiped. Confidentiality obligations don't end at device retirement.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">🖥️</div>
+      <div class="pain-title">Old Workstations &amp; Servers</div>
+      <p class="pain-desc">On-premise servers from prior years hold client databases, billing records, and matter files. When you upgrade, the old hardware rarely gets properly destroyed.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">📁</div>
+      <div class="pain-title">No Destruction Documentation</div>
+      <p class="pain-desc">Bar associations increasingly expect documented data handling procedures. "We recycled it" is not documentation. A Certificate of Destruction is.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">🔓</div>
+      <div class="pain-title">Vendor Risk</div>
+      <p class="pain-desc">Most recycling companies are logistics operations — not security firms. You don't know how your client data was handled after pickup. We are cybersecurity professionals first.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="offer-box">
+  <div class="offer-inner">
+    <div>
+      <div class="section-tag">// Our Solution</div>
+      <div class="offer-title">SECURE IT<br>ASSET <span class="amber">DISPOSAL</span><br>FOR LAW.</div>
+      <p class="offer-desc">We handle pickup, on-site destruction, and documentation. Your client confidentiality obligations stay intact. We give you the paperwork to prove it.</p>
+      <button class="btn-primary" onclick="openForm()">Schedule Secure Pickup</button>
+    </div>
+    <div>
+      <ul class="offer-list">
+        <li><strong>We come to your office</strong> — no drop-off, no third-party chain of custody gaps</li>
+        <li><strong>On-site physical destruction</strong> — hard drives and SSDs destroyed in front of your staff</li>
+        <li><strong>Certificate of Destruction issued same day</strong> — per device or per batch, suitable for compliance documentation</li>
+        <li><strong>Full chain of custody</strong> — every device logged from your office to final destruction</li>
+        <li><strong>Cybersecurity-certified operator</strong> — we understand data liability, not just pickup logistics</li>
+        <li><strong>No minimum</strong> — one laptop or a server room, we handle it</li>
+        <li><strong>Discreet, professional service</strong> — we work around your client schedule and office hours</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section id="how">
+  <div class="section-tag">// Process</div>
+  <h2>HOW IT<br>WORKS</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Text or Submit a Request</h3>
+        <p>Tell us what you have — device count, types, and your office location. We respond same business day. A quick text works fine — no long forms required.</p>
+        <span class="step-badge">Takes 2 minutes</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>We Come To Your Office</h3>
+        <p>We schedule around your hours — before clients arrive, after close, or on a day that works for your team. Discreet, professional, no disruption to your practice.</p>
+        <span class="step-badge">We come to you</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>On-Site Destruction With Full Logging</h3>
+        <p>Every device is inventoried and logged. Physical destruction performed on-site when required. You maintain visibility over the entire process — nothing leaves undocumented.</p>
+        <span class="step-badge">Full chain of custody</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Certificate of Destruction — Same Day</h3>
+        <p>You receive a Certificate of Destruction before we leave. Per device or per batch. Suitable for bar compliance documentation and firm records.</p>
+        <span class="step-badge">COD issued same day</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <h2 style="color:var(--bg)">CLEAR YOUR STORAGE.<br>CLOSE THE LIABILITY.</h2>
+  <p>One conversation is all it takes. We quote same day, schedule around your hours, and handle everything on-site with full documentation.</p>
+  <button class="btn-accent" onclick="openForm()">Schedule Secure Pickup</button>
+</div>
+
+<footer>
+  <div class="footer-logo-text">POOF E <span>GONE</span></div>
+  <div class="footer-info">Baltimore, MD &nbsp;·&nbsp; (202) 596-1361</div>
+  <div class="footer-info">© 2026 Poof E Gone · Secure IT Asset Disposal</div>
+</footer>
+
+<div class="form-overlay" id="formOverlay" onclick="closeForm()"></div>
+<div class="form-panel" id="formPanel">
+  <div class="form-panel-header">
+    <div>
+      <div class="form-panel-title">SCHEDULE PICKUP</div>
+      <div class="form-panel-sub">// Law Firm — Confidential Data Destruction</div>
+    </div>
+    <button class="form-close" onclick="closeForm()">✕</button>
+  </div>
+  <div class="form-body">
+    <form id="intakeForm" name="intake" method="POST" action="/" netlify onsubmit="return false;">
+      <input type="hidden" name="form-name" value="intake" />
+      <div class="form-grid">
+        <div class="form-row">
+          <div class="form-group"><label>Firm Name</label><input type="text" id="company" name="company" placeholder="Smith &amp; Associates" /></div>
+          <div class="form-group"><label>Your Name</label><input type="text" id="name" name="name" placeholder="Jane Smith, Esq." /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Email</label><input type="email" id="email" name="email" placeholder="jsmith@firm.com" /></div>
+          <div class="form-group"><label>Phone</label><input type="tel" id="phone" name="phone" placeholder="(410) 000-0000" /></div>
+        </div>
+        <div class="form-group">
+          <label>What do you have?</label>
+          <select id="service" name="service">
+            <option value="" disabled selected>Select device type</option>
+            <option>Attorney laptops / workstations</option>
+            <option>On-premise server(s)</option>
+            <option>Hard drives and SSDs only</option>
+            <option>Mixed office equipment</option>
+            <option>Mix of devices — I'll explain below</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Number of Devices</label>
+            <select id="quantity" name="quantity">
+              <option value="" disabled selected>Select range</option>
+              <option>1–5 devices</option><option>6–20 devices</option>
+              <option>21–50 devices</option><option>50+ devices</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Timeline</label>
+            <select id="timeline" name="timeline">
+              <option value="" disabled selected>Select timing</option>
+              <option>As soon as possible</option>
+              <option>Within the next week</option>
+              <option>Flexible / just getting a quote</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Additional Notes</label>
+          <textarea id="notes" name="notes" placeholder="Device details, preferred scheduling (before/after hours), any compliance documentation requirements..."></textarea>
+        </div>
+      </div>
+      <button class="form-submit" type="button" onclick="submitForm()">Request Pickup →</button>
+      <p class="form-note">🔒 Confidential process. COD issued per device. No data leaves undocumented.</p>
+    </form>
+    <div class="form-success-panel" id="formSuccess">
+      <div class="check">✅</div>
+      <h3>Request Received</h3>
+      <p>We'll follow up within one business day.<br>Need it faster? Text us at <strong style="color:var(--white)">(202) 596-1361</strong></p>
+    </div>
+  </div>
+</div>
+
+<button class="chat-bubble" id="chatBubble" onclick="toggleChat()">
+  <span class="bubble-icon">💬</span>
+  <span class="bubble-close">✕</span>
+</button>
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-avatar">⚖️</div>
+    <div>
+      <div class="chat-header-name">Poof E Gone</div>
+      <div class="chat-header-status">● Online now</div>
+    </div>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input-area">
+    <textarea class="chat-input" id="chatInput" placeholder="Ask about data destruction, documentation, or scheduling..." rows="1" onkeydown="handleKey(event)"></textarea>
+    <button class="chat-send" onclick="sendMessage()">→</button>
+  </div>
+</div>
+
+<script>
+  function openForm() { document.getElementById('formPanel').classList.add('open'); document.getElementById('formOverlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeForm() { document.getElementById('formPanel').classList.remove('open'); document.getElementById('formOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeForm(); });
+  async function submitForm() {
+    const required = ['company','name','email','phone'];
+    let valid = true;
+    required.forEach(id => { const el = document.getElementById(id); if (!el.value.trim()) { el.style.borderColor = '#e84e0f'; valid = false; } else { el.style.borderColor = '#d8d0c0'; } });
+    if (!valid) return;
+    const form = document.getElementById('intakeForm');
+    const payload = new URLSearchParams(new FormData(form)).toString();
+    try {
+      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: payload });
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } catch (e) {
+      alert('Submission failed. Please text us at (202) 596-1361.');
+    }
+  }
+  let chatHistory = [], chatOpen = false;
+  function toggleChat() {
+    chatOpen = !chatOpen;
+    document.getElementById('chatWindow').classList.toggle('open', chatOpen);
+    document.getElementById('chatBubble').classList.toggle('open', chatOpen);
+    if (chatOpen && chatHistory.length === 0) {
+      setTimeout(function() { addBotMessage("Hi — I specialize in confidential data destruction for law firms. We pick up retired devices, destroy data on-site, and issue a Certificate of Destruction same day. What can I help with?"); }, 400);
+    }
+  }
+  function handleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
+  function addBotMessage(text) { var msgs = document.getElementById('chatMessages'); var msg = document.createElement('div'); msg.className = 'chat-msg bot'; msg.innerHTML = '<div class="chat-msg-bubble">' + text + '</div>'; msgs.appendChild(msg); msgs.scrollTop = msgs.scrollHeight; }
+  function addUserMessage(text) { var msgs = document.getElementById('chatMessages'); var msg = document.createElement('div'); msg.className = 'chat-msg user'; msg.innerHTML = '<div class="chat-msg-bubble">' + text + '</div>'; msgs.appendChild(msg); msgs.scrollTop = msgs.scrollHeight; }
+  function showTyping() { var msgs = document.getElementById('chatMessages'); var t = document.createElement('div'); t.className = 'chat-msg bot'; t.id = 'typingIndicator'; t.innerHTML = '<div class="chat-typing"><span></span><span></span><span></span></div>'; msgs.appendChild(t); msgs.scrollTop = msgs.scrollHeight; }
+  function removeTyping() { var t = document.getElementById('typingIndicator'); if (t) t.remove(); }
+  async function sendMessage() {
+    var input = document.getElementById('chatInput'); var text = input.value.trim(); if (!text) return; input.value = '';
+    addUserMessage(text); chatHistory.push({ role: 'user', content: text }); showTyping();
+    try {
+      var res = await fetch('/.netlify/functions/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: chatHistory }) });
+      var data = await res.json(); var reply = data.reply;
+      chatHistory.push({ role: 'assistant', content: reply }); removeTyping(); addBotMessage(reply);
+    } catch(e) { removeTyping(); addBotMessage("Sorry, connection issue. Text us at (202) 596-1361."); }
+  }
+</script>
+</body>
+</html>

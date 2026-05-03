@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Poof E Gone — Baltimore's Mobile IT Partner</title>
+<title>Poof E Gone — Secure IT Asset Disposal · Baltimore</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -40,10 +40,7 @@
     background: rgba(245,240,232,0.96);
     backdrop-filter: blur(12px);
   }
-  .nav-logo {
-    display: flex; align-items: center; gap: 12px;
-  }
-  .nav-logo img { width: 40px; height: 40px; object-fit: contain; }
+  .nav-logo { display: flex; align-items: center; gap: 12px; }
   .nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--green); }
   .nav-logo-text span { color: var(--white); }
   .nav-links { display: flex; gap: 28px; align-items: center; }
@@ -57,9 +54,6 @@
     box-shadow: 0 2px 8px rgba(232,78,15,0.3);
   }
   .nav-cta:hover { background: var(--accent-dim); }
-
-
-
 
   /* HERO */
   .hero {
@@ -101,6 +95,13 @@
   .hero-text-cta { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 1px; margin-bottom: 40px; }
   .hero-text-cta span { color: var(--white); font-weight: 600; }
   .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-verticals { display: flex; gap: 12px; margin-top: 48px; flex-wrap: wrap; }
+  .hero-vertical-pill {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    color: var(--muted); border: 1px solid var(--border); padding: 6px 14px;
+    text-transform: uppercase; text-decoration: none; transition: all 0.2s;
+  }
+  .hero-vertical-pill:hover { border-color: var(--green); color: var(--green); }
 
   .btn-primary {
     background: var(--accent); color: #fff;
@@ -167,10 +168,7 @@
   .ai-section { background: var(--white); color: var(--bg); }
   .ai-section h2 { color: var(--bg); }
   .ai-section .section-tag { color: var(--accent); }
-  .ai-box {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
-    position: relative;
-  }
+  .ai-box { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
   .ai-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; margin-bottom: 16px; color: var(--bg); }
   .ai-title .amber { color: var(--accent); }
   .ai-desc { font-size: 16px; color: rgba(245,240,232,0.7); line-height: 1.7; margin-bottom: 28px; }
@@ -220,43 +218,32 @@
 
   .divider { height: 1px; background: var(--border); margin: 0 48px; }
 
-  /* SLIDE-IN FORM PANEL */
+  /* FORM PANEL */
   .form-overlay {
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(17,17,17,0.5); z-index: 998;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.3s ease;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
   }
   .form-overlay.open { opacity: 1; pointer-events: all; }
-
   .form-panel {
     position: fixed; top: 0; right: 0; bottom: 0;
     width: 480px; max-width: 100vw;
     background: var(--card); z-index: 999;
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto;
-    box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+    overflow-y: auto; box-shadow: -8px 0 40px rgba(0,0,0,0.12);
     display: flex; flex-direction: column;
   }
   .form-panel.open { transform: translateX(0); }
-
   .form-panel-header {
-    padding: 32px 32px 24px;
-    border-bottom: 1px solid var(--border);
+    padding: 32px 32px 24px; border-bottom: 1px solid var(--border);
     display: flex; justify-content: space-between; align-items: flex-start;
-    background: var(--bg);
-    position: sticky; top: 0; z-index: 1;
+    background: var(--bg); position: sticky; top: 0; z-index: 1;
   }
   .form-panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--white); }
   .form-panel-sub { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-top: 4px; }
-  .form-close {
-    background: none; border: 1px solid var(--border); color: var(--muted);
-    font-size: 18px; cursor: pointer; padding: 8px 12px;
-    transition: all 0.2s; line-height: 1;
-  }
+  .form-close { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 18px; cursor: pointer; padding: 8px 12px; transition: all 0.2s; line-height: 1; }
   .form-close:hover { border-color: var(--accent); color: var(--accent); }
-
   .form-body { padding: 28px 32px 40px; flex: 1; }
   .form-grid { display: flex; flex-direction: column; gap: 18px; }
   .form-group { display: flex; flex-direction: column; gap: 6px; }
@@ -280,7 +267,6 @@
   }
   .form-submit:hover { background: var(--accent-dim); }
   .form-note { margin-top: 12px; font-size: 11px; color: var(--muted); text-align: center; font-family: 'DM Mono', monospace; }
-
   .form-success-panel { display: none; text-align: center; padding: 60px 32px; }
   .form-success-panel .check { font-size: 48px; margin-bottom: 20px; }
   .form-success-panel h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--green); margin-bottom: 12px; }
@@ -289,10 +275,12 @@
   /* FOOTER */
   footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: var(--dark); }
   .footer-logo { display: flex; align-items: center; gap: 10px; }
-  .footer-logo img { width: 32px; height: 32px; object-fit: contain; }
   .footer-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: var(--green); }
   .footer-logo-text span { color: var(--white); }
   .footer-info { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--green); }
 
   /* ANIMATIONS */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
@@ -361,6 +349,7 @@
     section { padding: 64px 20px; }
     .compliance-box, .ai-box { grid-template-columns: 1fr; gap: 32px; padding: 28px 20px; }
     footer { padding: 28px 20px; flex-direction: column; align-items: flex-start; }
+    .footer-links { flex-wrap: wrap; gap: 12px; }
     .divider { margin: 0 20px; }
     .step { grid-template-columns: 52px 1fr; gap: 16px; }
     .form-panel { width: 100vw; }
@@ -373,7 +362,8 @@
 <body>
 
 <nav>
-
+  <div class="nav-logo">
+    <div class="nav-logo-text">POOF E <span>GONE</span></div>
   </div>
   <div class="nav-links">
     <a href="#services">Services</a>
@@ -381,44 +371,52 @@
     <a href="#clients">Who We Serve</a>
     <a href="#how-it-works">Process</a>
   </div>
-  <button class="nav-cta" onclick="openForm()">Request Service</button>
+  <button class="nav-cta" onclick="openForm()">Schedule Secure Pickup</button>
 </nav>
 
 <section class="hero">
-<div class="hero-tag">Baltimore's Mobile IT Partner</div>  <div class="hero-tag">Baltimore&apos;s Mobile IT Partner</div>
-  <h1>WE COME TO <span class="accent-green">YOU.</span><br>WE FIX. WE <span class="accent-red">DESTROY.</span></h1>
-  <p class="hero-sub">PC repair, AI setup, secure data destruction, and certified e-waste pickup — all mobile, we come to you.</p>
-  <p class="hero-text-cta">For a fast quote, text a photo and a brief description: <span>(202) 596-1361</span></p>
+  <div class="hero-tag">Baltimore · Secure IT Asset Disposal</div>
+  <h1>YOUR OLD <span class="accent-green">DEVICES</span><br>ARE A <span class="accent-red">LIABILITY.</span><br>WE HANDLE IT.</h1>
+  <p class="hero-sub">Old laptops and hard drives sitting in storage become a compliance risk. We pick them up, destroy the data, and issue a Certificate of Destruction — mobile, same day, no minimums.</p>
+  <p class="hero-text-cta">Fast quote via text: <span>(202) 596-1361</span></p>
   <div class="hero-actions">
-    <button class="btn-primary" onclick="openForm()">Schedule a Visit</button>
+    <button class="btn-primary" onclick="openForm()">Schedule Secure Pickup</button>
     <a href="#services" class="btn-ghost">See All Services</a>
+  </div>
+  <div class="hero-verticals">
+    <a href="dental.html" class="hero-vertical-pill">🦷 Dental Practices</a>
+    <a href="law.html" class="hero-vertical-pill">⚖️ Law Firms</a>
+    <a href="#clients" class="hero-vertical-pill">🏥 Medical Offices</a>
+    <a href="#clients" class="hero-vertical-pill">💼 CPA Firms</a>
   </div>
 </section>
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span>PC Repair &amp; Cleaning <span class="ticker-dot">◆</span></span>
-    <span>AI Setup &amp; Training <span class="ticker-dot">◆</span></span>
-    <span>MDM — Intune · Jamf · MobileIron <span class="ticker-dot">◆</span></span>
     <span>Certified Data Destruction <span class="ticker-dot">◆</span></span>
+    <span>Certificate of Destruction Issued Per Job <span class="ticker-dot">◆</span></span>
+    <span>HIPAA Ready <span class="ticker-dot">◆</span></span>
     <span>Mobile Pickup — We Come To You <span class="ticker-dot">◆</span></span>
-    <span>No Minimum Quantities <span class="ticker-dot">◆</span></span>
+    <span>No Minimum Device Count <span class="ticker-dot">◆</span></span>
+    <span>PC Repair &amp; AI Setup <span class="ticker-dot">◆</span></span>
+    <span>MDM — Intune · Jamf · MobileIron <span class="ticker-dot">◆</span></span>
     <span>Baltimore &amp; Surrounding Counties <span class="ticker-dot">◆</span></span>
-    <span>PC Repair &amp; Cleaning <span class="ticker-dot">◆</span></span>
-    <span>AI Setup &amp; Training <span class="ticker-dot">◆</span></span>
-    <span>MDM — Intune · Jamf · MobileIron <span class="ticker-dot">◆</span></span>
     <span>Certified Data Destruction <span class="ticker-dot">◆</span></span>
+    <span>Certificate of Destruction Issued Per Job <span class="ticker-dot">◆</span></span>
+    <span>HIPAA Ready <span class="ticker-dot">◆</span></span>
     <span>Mobile Pickup — We Come To You <span class="ticker-dot">◆</span></span>
-    <span>No Minimum Quantities <span class="ticker-dot">◆</span></span>
+    <span>No Minimum Device Count <span class="ticker-dot">◆</span></span>
+    <span>PC Repair &amp; AI Setup <span class="ticker-dot">◆</span></span>
+    <span>MDM — Intune · Jamf · MobileIron <span class="ticker-dot">◆</span></span>
     <span>Baltimore &amp; Surrounding Counties <span class="ticker-dot">◆</span></span>
   </div>
 </div>
 
 <div class="stats">
-  <div class="stat-item"><div class="stat-num">24HR</div><div class="stat-label">Turnaround Available</div></div>
+  <div class="stat-item"><div class="stat-num">COD</div><div class="stat-label">Certificate Issued Per Job</div></div>
   <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Secure Data Destruction</div></div>
   <div class="stat-item"><div class="stat-num">0</div><div class="stat-label">Minimum Device Count</div></div>
-  <div class="stat-item"><div class="stat-num">COD</div><div class="stat-label">Certificate Issued Per Job</div></div>
+  <div class="stat-item"><div class="stat-num">24HR</div><div class="stat-label">Turnaround Available</div></div>
   <div class="stat-item"><div class="stat-num">MDM</div><div class="stat-label">Intune · Jamf · MobileIron</div></div>
 </div>
 
@@ -427,6 +425,22 @@
   <h2>FULL SERVICE<br>MOBILE IT</h2>
   <p style="color: var(--muted); font-size: 16px; max-width: 560px;">One visit. Multiple problems solved. We show up with tools, we leave with your tech handled.</p>
   <div class="services-grid">
+    <div class="service-card featured">
+      <div class="service-badge">Core Offer</div>
+      <div class="service-icon">🔐</div>
+      <div class="service-title">Certified Data Destruction</div>
+      <div class="service-price">Per device / batch</div>
+      <p class="service-desc">HIPAA-ready data wiping and physical destruction with a Certificate of Destruction issued per job. Compliance documentation included — suitable for audits.</p>
+      <div class="service-tags"><span class="service-tag">HIPAA</span><span class="service-tag">Legal</span><span class="service-tag">COD issued</span></div>
+    </div>
+    <div class="service-card featured">
+      <div class="service-badge">Core Offer</div>
+      <div class="service-icon">♻️</div>
+      <div class="service-title">IT Asset Pickup &amp; Disposal</div>
+      <div class="service-price">Scheduled pickup</div>
+      <p class="service-desc">We pick up old laptops, drives, tablets, and servers. No drop-off required. We sort, destroy, and dispose responsibly — you get documentation for every device.</p>
+      <div class="service-tags"><span class="service-tag">Mobile</span><span class="service-tag">No minimum</span><span class="service-tag">Baltimore</span></div>
+    </div>
     <div class="service-card">
       <div class="service-icon">🖥️</div>
       <div class="service-title">PC Cleaning &amp; Tune-Up</div>
@@ -440,13 +454,6 @@
       <div class="service-price">Parts + Labor</div>
       <p class="service-desc">RAM upgrades, SSD installs, battery replacements. Extend device life before you spend on a full replacement.</p>
       <div class="service-tags"><span class="service-tag">SSD swaps</span><span class="service-tag">RAM upgrades</span><span class="service-tag">Battery</span></div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🦠</div>
-      <div class="service-title">Virus &amp; Malware Removal</div>
-      <div class="service-price">Starting at $99</div>
-      <p class="service-desc">Full system scan, malware removal, browser cleanup, and security hardening so it doesn&apos;t happen again.</p>
-      <div class="service-tags"><span class="service-tag">Same-day</span><span class="service-tag">Security audit</span></div>
     </div>
     <div class="service-card featured">
       <div class="service-badge">New</div>
@@ -465,18 +472,11 @@
       <div class="service-tags"><span class="service-tag">Microsoft Intune</span><span class="service-tag">Jamf</span><span class="service-tag">MobileIron</span><span class="service-tag">HIPAA ready</span></div>
     </div>
     <div class="service-card">
-      <div class="service-icon">🔐</div>
-      <div class="service-title">Certified Data Destruction</div>
-      <div class="service-price">Per device / batch</div>
-      <p class="service-desc">HIPAA-ready data wiping and physical destruction with a Certificate of Destruction issued per job. Compliance documentation included.</p>
-      <div class="service-tags"><span class="service-tag">HIPAA</span><span class="service-tag">Legal</span><span class="service-tag">COD issued</span></div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">♻️</div>
-      <div class="service-title">E-Waste Pickup &amp; Recycling</div>
-      <div class="service-price">Scheduled pickup</div>
-      <p class="service-desc">We pick up your old devices, sort usable from recyclable, and handle responsible disposal. No drop-off required — we come to you.</p>
-      <div class="service-tags"><span class="service-tag">Mobile</span><span class="service-tag">No minimum</span><span class="service-tag">Baltimore</span></div>
+      <div class="service-icon">🦠</div>
+      <div class="service-title">Virus &amp; Malware Removal</div>
+      <div class="service-price">Starting at $99</div>
+      <p class="service-desc">Full system scan, malware removal, browser cleanup, and security hardening so it doesn't happen again.</p>
+      <div class="service-tags"><span class="service-tag">Same-day</span><span class="service-tag">Security audit</span></div>
     </div>
   </div>
 </section>
@@ -487,9 +487,9 @@
   <div class="ai-box">
     <div>
       <div class="section-tag">// The Edge Nobody Else Has</div>
-      <div class="ai-title">YOUR BUSINESS<br>NEEDS <span class="amber">AI.</span><br>WE SET IT UP.</div>
-      <p class="ai-desc">Remote for solo setups. On-site when your team needs hands-on teaching. We configure the right tools for your workflow, train every user, and price it per person — so you only pay for what you actually need.</p>
-      <button class="btn-primary" onclick="openForm()" style="background: var(--accent);">Book AI Setup Session</button>
+      <div class="ai-title">AFTER CLEANUP,<br>WE HELP YOU <span class="amber">MODERNIZE.</span></div>
+      <p class="ai-desc">What stays in your office should work smarter. We configure AI tools, deploy device management, and train your team — while we're already there.</p>
+      <button class="btn-primary" onclick="openForm()" style="background: var(--accent);">Schedule Secure Pickup</button>
     </div>
     <div>
       <ul class="ai-list">
@@ -508,12 +508,36 @@
   <div class="section-tag">// Who We Serve</div>
   <h2>BUILT FOR<br>BUSINESSES</h2>
   <div class="clients-grid">
-    <div class="client-card"><div class="client-icon">🏢</div><div class="client-title">Office Managers</div><p class="client-desc">Repairs, upgrades, and e-waste handled in one scheduled visit. We come to your office — zero disruption to your team.</p></div>
-    <div class="client-card"><div class="client-icon">⚖️</div><div class="client-title">Law Firms</div><p class="client-desc">Confidential data destruction, device optimization, and AI tools to streamline document workflows. We understand compliance.</p></div>
-    <div class="client-card"><div class="client-icon">🏥</div><div class="client-title">Medical Offices</div><p class="client-desc">HIPAA-ready data destruction plus AI setup for administrative workflows. Documentation provided for every job.</p></div>
-    <div class="client-card"><div class="client-icon">🏘️</div><div class="client-title">Property Managers</div><p class="client-desc">Tenant turnover cleanouts, equipment disposal, and office tech refreshes — scheduled on your timeline.</p></div>
-    <div class="client-card"><div class="client-icon">💼</div><div class="client-title">Accountants &amp; CPA Firms</div><p class="client-desc">Secure drive destruction, PC optimization, and AI tools that cut bookkeeping admin time.</p></div>
-    <div class="client-card"><div class="client-icon">🖥️</div><div class="client-title">IT Departments</div><p class="client-desc">Fleet refreshes, MDM deployment, bulk data destruction, and hardware upgrades. We work alongside your team.</p></div>
+    <div class="client-card" style="cursor:pointer" onclick="window.location.href='dental.html'">
+      <div class="client-icon">🦷</div>
+      <div class="client-title">Dental Practices</div>
+      <p class="client-desc">HIPAA-compliant data destruction for retired imaging systems, front-desk PCs, and tablets. Certificate of Destruction issued per device.</p>
+    </div>
+    <div class="client-card" style="cursor:pointer" onclick="window.location.href='law.html'">
+      <div class="client-icon">⚖️</div>
+      <div class="client-title">Law Firms</div>
+      <p class="client-desc">Confidential client data on retired devices is a liability. We destroy it, document it, and keep you audit-ready.</p>
+    </div>
+    <div class="client-card">
+      <div class="client-icon">🏥</div>
+      <div class="client-title">Medical Offices</div>
+      <p class="client-desc">HIPAA-ready data destruction plus AI setup for administrative workflows. Documentation provided for every job.</p>
+    </div>
+    <div class="client-card">
+      <div class="client-icon">🏘️</div>
+      <div class="client-title">Property Managers</div>
+      <p class="client-desc">Tenant turnover cleanouts, equipment disposal, and office tech refreshes — scheduled on your timeline.</p>
+    </div>
+    <div class="client-card">
+      <div class="client-icon">💼</div>
+      <div class="client-title">Accountants &amp; CPA Firms</div>
+      <p class="client-desc">Secure drive destruction, PC optimization, and AI tools that cut bookkeeping admin time.</p>
+    </div>
+    <div class="client-card">
+      <div class="client-icon">🖥️</div>
+      <div class="client-title">IT Departments</div>
+      <p class="client-desc">Fleet refreshes, MDM deployment, bulk data destruction, and hardware upgrades. We work alongside your team.</p>
+    </div>
   </div>
 </section>
 
@@ -528,10 +552,10 @@
       <div class="step-content">
         <div class="step-header"><h3>Submit Your Request</h3><span class="step-arrow">+</span></div>
         <div class="step-body">
-          <p>Fill out our intake form or text us directly at (202) 596-1361. Tell us what you need — repair, AI setup, MDM, data destruction, or all of the above.</p>
+          <p>Fill out our intake form or text us directly at (202) 596-1361. Tell us what you need — data destruction, pickup, AI setup, MDM, or all of the above.</p>
           <ul class="step-list">
             <li>Takes about 2 minutes to complete</li>
-            <li>Or just text us a photo of your setup</li>
+            <li>Or just text us a description of what you have</li>
             <li>We respond within one business day</li>
           </ul>
         </div>
@@ -543,7 +567,7 @@
       <div class="step-content">
         <div class="step-header"><h3>We Schedule &amp; Show Up</h3><span class="step-arrow">+</span></div>
         <div class="step-body">
-          <p>We come to your office, facility, or location. No drop-offs needed. Mobile unit equipped for repair, MDM deployment, and destruction.</p>
+          <p>We come to your office, facility, or location. No drop-offs. Mobile unit equipped for on-site destruction, MDM deployment, and repair.</p>
           <ul class="step-list">
             <li>Saturday availability — most competitors are closed</li>
             <li>Baltimore metro + surrounding counties</li>
@@ -558,11 +582,11 @@
       <div class="step-content">
         <div class="step-header"><h3>We Assess &amp; Execute</h3><span class="step-arrow">+</span></div>
         <div class="step-body">
-          <p>On arrival we assess every device. Repairable equipment gets fixed or upgraded on the spot. MDM gets deployed. Data destruction handled with chain of custody.</p>
+          <p>Every device is logged and assessed. Data destruction handled with full chain of custody. Repairable equipment flagged. You see everything happen on-site.</p>
           <ul class="step-list">
-            <li>Repairs and upgrades done on-site when possible</li>
-            <li>AI setup and staff training completed in one session</li>
-            <li>Full transparency — you see everything happen</li>
+            <li>Full chain of custody maintained</li>
+            <li>Physical destruction available for drives and SSDs</li>
+            <li>AI setup and staff training in one session</li>
           </ul>
         </div>
         <span class="step-badge">On-site execution</span>
@@ -573,7 +597,7 @@
       <div class="step-content">
         <div class="step-header"><h3>Documentation &amp; Done</h3><span class="step-arrow">+</span></div>
         <div class="step-body">
-          <p>Every job closes with proper documentation. Certificate of Data Destruction issued for disposal jobs. Service summary for repair and AI setup visits.</p>
+          <p>Every job closes with a Certificate of Destruction per device or batch. Suitable for HIPAA, legal, and financial compliance audits. Delivered same day.</p>
           <ul class="step-list">
             <li>COD issued per device or per batch</li>
             <li>Suitable for HIPAA, legal, and financial compliance</li>
@@ -592,17 +616,17 @@
       <div class="section-tag">// Why It Matters</div>
       <div class="compliance-title">DATA <span class="accent">LIABILITY</span> IS REAL.</div>
       <p class="compliance-desc">Improperly disposed electronics are one of the most common sources of data breaches for small businesses. A Certificate of Destruction is your proof you handled it correctly — and we bring it to your door.</p>
-      <button class="btn-primary" onclick="openForm()">Get Protected Today</button>
+      <button class="btn-primary" onclick="openForm()">Schedule Secure Pickup</button>
     </div>
     <div>
       <ul class="cert-list">
         <li>Mobile service — we come directly to your office or site</li>
         <li>Physical destruction available for hard drives and SSDs</li>
-        <li>Certificate issued per device or per batch</li>
+        <li>Certificate of Destruction issued per device or per batch</li>
         <li>Suitable for HIPAA, legal, and financial compliance documentation</li>
-        <li>AI setup by a certified cybersecurity professional</li>
+        <li>Cybersecurity-certified operator — not just a pickup service</li>
         <li>MDM deployment — Intune, Jamf, MobileIron</li>
-        <li>Baltimore-based — you know exactly who you&apos;re dealing with</li>
+        <li>Baltimore-based — you know exactly who you're dealing with</li>
       </ul>
     </div>
   </div>
@@ -610,17 +634,18 @@
 
 <footer>
   <div class="footer-logo">
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABh..." style="display:none" />
-    <div class="footer-logo-text">POOF E<span> GONE</span></div>
+    <div class="footer-logo-text">POOF E <span>GONE</span></div>
   </div>
-  <div class="footer-info">Baltimore, MD &nbsp;·&nbsp; (202) 596-1361</div>
-  <div class="footer-info">© 2026 Poof E Gone · Mobile IT Services</div>
+  <div class="footer-links">
+    <a href="dental.html">Dental</a>
+    <a href="law.html">Law Firms</a>
+    <a href="#services">Services</a>
+    <a href="#how-it-works">Process</a>
+  </div>
+  <div class="footer-info">Baltimore, MD &nbsp;·&nbsp; (202) 596-1361 &nbsp;·&nbsp; © 2026 Poof E Gone</div>
 </footer>
 
-<!-- OVERLAY -->
 <div class="form-overlay" id="formOverlay" onclick="closeForm()"></div>
-
-<!-- SLIDE-IN FORM PANEL -->
 <div class="form-panel" id="formPanel">
   <div class="form-panel-header">
     <div>
@@ -630,45 +655,46 @@
     <button class="form-close" onclick="closeForm()">✕</button>
   </div>
   <div class="form-body">
-    <form id="intakeForm" onsubmit="return false;">
+    <form id="intakeForm" name="intake" method="POST" action="/" netlify onsubmit="return false;">
+      <input type="hidden" name="form-name" value="intake" />
       <div class="form-grid">
         <div class="form-row">
-          <div class="form-group"><label>Company Name</label><input type="text" id="company" placeholder="Acme Corp" /></div>
-          <div class="form-group"><label>Your Name</label><input type="text" id="name" placeholder="Jane Smith" /></div>
+          <div class="form-group"><label>Company Name</label><input type="text" id="company" name="company" placeholder="Acme Corp" /></div>
+          <div class="form-group"><label>Your Name</label><input type="text" id="name" name="name" placeholder="Jane Smith" /></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="jane@acme.com" /></div>
-          <div class="form-group"><label>Phone</label><input type="tel" id="phone" placeholder="(410) 000-0000" /></div>
+          <div class="form-group"><label>Email</label><input type="email" id="email" name="email" placeholder="jane@acme.com" /></div>
+          <div class="form-group"><label>Phone</label><input type="tel" id="phone" name="phone" placeholder="(410) 000-0000" /></div>
         </div>
         <div class="form-group">
           <label>Industry</label>
-          <select id="industry">
+          <select id="industry" name="industry">
             <option value="" disabled selected>Select your industry</option>
-            <option>Law Firm</option><option>Medical / Healthcare</option>
-            <option>Accounting / Finance</option><option>Property Management</option>
-            <option>IT / Technology</option><option>Government</option>
-            <option>General Office / Corporate</option><option>Other</option>
+            <option>Dental Practice</option><option>Law Firm</option>
+            <option>Medical / Healthcare</option><option>Accounting / Finance</option>
+            <option>Property Management</option><option>IT / Technology</option>
+            <option>Government</option><option>General Office / Corporate</option><option>Other</option>
           </select>
         </div>
         <div class="form-group">
           <label>Primary Service Needed</label>
-          <select id="service">
+          <select id="service" name="service">
             <option value="" disabled selected>Select primary service</option>
+            <option>Certified Data Destruction</option>
+            <option>IT Asset Pickup &amp; Disposal</option>
             <option>PC Cleaning &amp; Tune-Up</option>
             <option>Hardware Upgrade (RAM / SSD)</option>
             <option>Virus &amp; Malware Removal</option>
             <option>AI Setup — Remote (1–3 users)</option>
             <option>AI Setup — On-Site Team Training</option>
             <option>MDM Setup &amp; Management (Intune / Jamf / MobileIron)</option>
-            <option>Certified Data Destruction</option>
-            <option>E-Waste Pickup &amp; Recycling</option>
-            <option>Multiple Services — I&apos;ll explain below</option>
+            <option>Multiple Services — I'll explain below</option>
           </select>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label>Number of Devices</label>
-            <select id="quantity">
+            <select id="quantity" name="quantity">
               <option value="" disabled selected>Select range</option>
               <option>1–5 devices</option><option>6–20 devices</option>
               <option>21–50 devices</option><option>50+ devices</option>
@@ -676,7 +702,7 @@
           </div>
           <div class="form-group">
             <label>Timeline</label>
-            <select id="timeline">
+            <select id="timeline" name="timeline">
               <option value="" disabled selected>Select timing</option>
               <option>As soon as possible</option>
               <option>Within the next week</option>
@@ -686,7 +712,7 @@
         </div>
         <div class="form-group">
           <label>Additional Notes</label>
-          <textarea id="notes" placeholder="Device types, compliance needs, number of staff for AI training, MDM platform preference..."></textarea>
+          <textarea id="notes" name="notes" placeholder="Device types, compliance needs, number of staff for AI training, MDM platform preference..."></textarea>
         </div>
       </div>
       <button class="form-submit" type="button" onclick="submitForm()">Submit Service Request →</button>
@@ -695,21 +721,16 @@
     <div class="form-success-panel" id="formSuccess">
       <div class="check">✅</div>
       <h3>Request Received</h3>
-      <p>We&apos;ll follow up within one business day.<br>Need it faster? Text us at <strong style="color:var(--white)">(202) 596-1361</strong></p>
+      <p>We'll follow up within one business day.<br>Need it faster? Text us at <strong style="color:var(--white)">(202) 596-1361</strong></p>
     </div>
   </div>
 </div>
 
-<!-- CHAT PING -->
-<div class="chat-ping" id="chatPing">💻 PC repair · AI · MDM · Data destruction. Ask anything.</div>
-
-<!-- CHAT BUBBLE -->
+<div class="chat-ping" id="chatPing">🔐 Data destruction · HIPAA · COD issued same day.</div>
 <button class="chat-bubble" id="chatBubble" onclick="toggleChat()">
   <span class="bubble-icon">💬</span>
   <span class="bubble-close">✕</span>
 </button>
-
-<!-- CHAT WINDOW -->
 <div class="chat-window" id="chatWindow">
   <div class="chat-header">
     <div class="chat-avatar">⚡</div>
@@ -720,20 +741,17 @@
   </div>
   <div class="chat-messages" id="chatMessages"></div>
   <div class="chat-input-area">
-    <textarea class="chat-input" id="chatInput" placeholder="Ask about services, pricing, or scheduling..." rows="1" onkeydown="handleKey(event)"></textarea>
+    <textarea class="chat-input" id="chatInput" placeholder="Ask about data destruction, pricing, or scheduling..." rows="1" onkeydown="handleKey(event)"></textarea>
     <button class="chat-send" onclick="sendMessage()">→</button>
   </div>
 </div>
 
 <script>
-  // STEPS
   function toggleStep(el) {
     const isOpen = el.classList.contains('open');
     document.querySelectorAll('.expandable').forEach(s => s.classList.remove('open'));
     if (!isOpen) el.classList.add('open');
   }
-
-  // FORM PANEL
   function openForm() {
     document.getElementById('formPanel').classList.add('open');
     document.getElementById('formOverlay').classList.add('open');
@@ -744,10 +762,7 @@
     document.getElementById('formOverlay').classList.remove('open');
     document.body.style.overflow = '';
   }
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeForm();
-  });
-
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeForm(); });
   async function submitForm() {
     const required = ['company','name','email','phone'];
     let valid = true;
@@ -757,14 +772,21 @@
       else { el.style.borderColor = '#d8d0c0'; }
     });
     if (!valid) return;
-    document.getElementById('intakeForm').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
+    const form = document.getElementById('intakeForm');
+    const payload = new URLSearchParams(new FormData(form)).toString();
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: payload
+      });
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } catch (e) {
+      alert('Submission failed. Please text us at (202) 596-1361.');
+    }
   }
-
-  // CHATBOT
-  let chatHistory = [];
-  let chatOpen = false;
-
+  let chatHistory = [], chatOpen = false;
   function toggleChat() {
     chatOpen = !chatOpen;
     document.getElementById('chatWindow').classList.toggle('open', chatOpen);
@@ -772,48 +794,33 @@
     document.getElementById('chatPing').classList.add('hidden');
     if (chatOpen && chatHistory.length === 0) {
       setTimeout(function() {
-        addBotMessage("Hi! I&apos;m the Poof E Gone assistant. We do PC repair, AI setup, secure data destruction, and e-waste pickup — all mobile, we come to you. What can I help with?");
+        addBotMessage("Hi — I'm the Poof E Gone assistant. We do certified data destruction, IT asset pickup, PC repair, AI setup, and MDM — all mobile, we come to you. What can I help with?");
       }, 400);
     }
   }
-
-  function handleKey(e) {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-  }
-
+  function handleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
   function addBotMessage(text) {
     var msgs = document.getElementById('chatMessages');
     var msg = document.createElement('div');
     msg.className = 'chat-msg bot';
     msg.innerHTML = '<div class="chat-msg-bubble">' + text + '</div>';
-    msgs.appendChild(msg);
-    msgs.scrollTop = msgs.scrollHeight;
+    msgs.appendChild(msg); msgs.scrollTop = msgs.scrollHeight;
   }
-
   function addUserMessage(text) {
     var msgs = document.getElementById('chatMessages');
     var msg = document.createElement('div');
     msg.className = 'chat-msg user';
     msg.innerHTML = '<div class="chat-msg-bubble">' + text + '</div>';
-    msgs.appendChild(msg);
-    msgs.scrollTop = msgs.scrollHeight;
+    msgs.appendChild(msg); msgs.scrollTop = msgs.scrollHeight;
   }
-
   function showTyping() {
     var msgs = document.getElementById('chatMessages');
     var t = document.createElement('div');
-    t.className = 'chat-msg bot';
-    t.id = 'typingIndicator';
+    t.className = 'chat-msg bot'; t.id = 'typingIndicator';
     t.innerHTML = '<div class="chat-typing"><span></span><span></span><span></span></div>';
-    msgs.appendChild(t);
-    msgs.scrollTop = msgs.scrollHeight;
+    msgs.appendChild(t); msgs.scrollTop = msgs.scrollHeight;
   }
-
-  function removeTyping() {
-    var t = document.getElementById('typingIndicator');
-    if (t) t.remove();
-  }
-
+  function removeTyping() { var t = document.getElementById('typingIndicator'); if (t) t.remove(); }
   async function sendMessage() {
     var input = document.getElementById('chatInput');
     var text = input.value.trim();
@@ -824,24 +831,19 @@
     showTyping();
     try {
       var res = await fetch('/.netlify/functions/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: chatHistory })
       });
       var data = await res.json();
       var reply = data.reply;
       chatHistory.push({ role: 'assistant', content: reply });
-      removeTyping();
-      addBotMessage(reply);
+      removeTyping(); addBotMessage(reply);
     } catch(e) {
       removeTyping();
       addBotMessage("Sorry, connection issue. Text us directly at (202) 596-1361.");
     }
   }
-
-  setTimeout(function() {
-    if (!chatOpen) document.getElementById('chatPing').style.display = 'block';
-  }, 3000);
+  setTimeout(function() { if (!chatOpen) document.getElementById('chatPing').style.display = 'block'; }, 3000);
 </script>
 </body>
 </html>
