@@ -1,0 +1,377 @@
+{
+  "template_id": "lead_outreach_intake_template_v1",
+  "version": "1.0.0",
+  "description": "Reusable outreach intake template for Brian's V1 operator. Matches the V1 state machine input schema and includes manual-form labels plus machine-readable validation.",
+  "compatibility": {
+    "state_machine": "lead_outreach_operator_v1",
+    "state_machine_version": "1.0.0"
+  },
+  "usage_modes": [
+    "manual_entry_form",
+    "automation_payload"
+  ],
+  "hard_constraints": {
+    "allowed_verticals": [
+      "dental_practice",
+      "law_firm",
+      "office_move_out",
+      "it_partner"
+    ],
+    "allowed_geographies": [
+      "baltimore",
+      "towson",
+      "howard_county"
+    ],
+    "blocked_signal_types": [
+      "invented_pain",
+      "invented_urgency",
+      "invented_staffing_change",
+      "invented_expansion_event",
+      "invented_compliance_issue",
+      "invented_trigger_event"
+    ],
+    "weak_trigger_policy": "Weak signals may be logged only if explicitly marked weak and supported by a real observed source. Invented or assumed triggers are not allowed.",
+    "out_of_scope_policy": "If lane or geography does not match V1 constraints, mark the lead out of scope instead of force-fitting it."
+  },
+  "manual_form_definition": {
+    "batch_fields": [
+      {
+        "field": "batch_id",
+        "label": "Batch ID",
+        "type": "string",
+        "required": true,
+        "placeholder": "2026-05-03-dental-batch-01",
+        "validation": {
+          "min_length": 3,
+          "max_length": 120
+        }
+      },
+      {
+        "field": "feedback_status",
+        "label": "Previous Batch Feedback Status",
+        "type": "enum",
+        "required": true,
+        "options": [
+          "present",
+          "missing",
+          "missing_unknown"
+        ],
+        "validation": {
+          "must_be_one_of": [
+            "present",
+            "missing",
+            "missing_unknown"
+          ]
+        }
+      },
+      {
+        "field": "feedback_notes",
+        "label": "Previous Batch Feedback Notes",
+        "type": "string",
+        "required": false,
+        "placeholder": "Brian said dental leads responded better to compliance-first angles.",
+        "validation": {
+          "max_length": 3000
+        }
+      },
+      {
+        "field": "run_status",
+        "label": "Run Status",
+        "type": "enum",
+        "required": false,
+        "options": [
+          "first_run_confirmed",
+          "continuation"
+        ],
+        "validation": {
+          "must_be_one_of": [
+            "first_run_confirmed",
+            "continuation"
+          ]
+        }
+      },
+      {
+        "field": "results_log_status",
+        "label": "Results Log Status",
+        "type": "enum",
+        "required": false,
+        "options": [
+          "logged",
+          "not_logged",
+          "not_applicable"
+        ],
+        "validation": {
+          "must_be_one_of": [
+            "logged",
+            "not_logged",
+            "not_applicable"
+          ]
+        }
+      }
+    ],
+    "lead_fields": [
+      {
+        "field": "lead_name",
+        "label": "Lead Name",
+        "type": "string",
+        "required": true,
+        "placeholder": "Dr. Jane Smith",
+        "validation": {
+          "min_length": 2,
+          "max_length": 120
+        }
+      },
+      {
+        "field": "company_name",
+        "label": "Company Name",
+        "type": "string",
+        "required": true,
+        "placeholder": "Towson Family Dental",
+        "validation": {
+          "min_length": 2,
+          "max_length": 160
+        }
+      },
+      {
+        "field": "lead_source",
+        "label": "Lead Source",
+        "type": "string",
+        "required": true,
+        "placeholder": "Google Maps, referral, website list, local directory",
+        "validation": {
+          "min_length": 2,
+          "max_length": 160,
+          "cannot_be_assumed": true
+        }
+      },
+      {
+        "field": "lane_classification",
+        "label": "Lane Classification",
+        "type": "enum",
+        "required": true,
+        "options": [
+          "dental_practice",
+          "law_firm",
+          "office_move_out",
+          "it_partner",
+          "out_of_v1_scope"
+        ],
+        "validation": {
+          "must_be_one_of": [
+            "dental_practice",
+            "law_firm",
+            "office_move_out",
+            "it_partner",
+            "out_of_v1_scope"
+          ],
+          "cannot_be_guessed": true
+        }
+      },
+      {
+        "field": "geography",
+        "label": "Geography",
+        "type": "enum",
+        "required": true,
+        "options": [
+          "baltimore",
+          "towson",
+          "howard_county",
+          "geography_unconfirmed",
+          "out_of_geo_scope"
+        ],
+        "validation": {
+          "must_be_one_of": [
+            "baltimore",
+            "towson",
+            "howard_county",
+            "geography_unconfirmed",
+            "out_of_geo_scope"
+          ],
+          "v1_allowed_values": [
+            "baltimore",
+            "towson",
+            "howard_county"
+          ]
+        }
+      },
+      {
+        "field": "website_url",
+        "label": "Website URL",
+        "type": "string",
+        "required": false,
+        "placeholder": "https://example.com",
+        "validation": {
+          "format": "url",
+          "max_length": 300
+        }
+      },
+      {
+        "field": "profile_url",
+        "label": "Profile URL",
+        "type": "string",
+        "required": false,
+        "placeholder": "https://maps.google.com/...",
+        "validation": {
+          "format": "url",
+          "max_length": 300
+        }
+      },
+      {
+        "field": "contact_name",
+        "label": "Contact Name",
+        "type": "string",
+        "required": false,
+        "placeholder": "Office Manager / Partner / IT Director",
+        "validation": {
+          "max_length": 120
+        }
+      },
+      {
+        "field": "real_observed_signals",
+        "label": "Real Observed Signals",
+        "type": "array",
+        "required": true,
+        "min_items": 1,
+        "item_schema": {
+          "signal_type": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "real_website_copy",
+              "real_service_page",
+              "real_local_geography",
+              "real_industry_fit",
+              "real_operational_clue",
+              "real_tech_clue",
+              "real_compliance_clue",
+              "real_office_move_relevance",
+              "real_asset_disposal_relevance",
+              "real_partner_fit_indicator"
+            ]
+          },
+          "signal_strength": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "weak",
+              "moderate",
+              "strong"
+            ]
+          },
+          "source_excerpt": {
+            "type": "string",
+            "required": true,
+            "max_length": 500
+          },
+          "source_location": {
+            "type": "string",
+            "required": true,
+            "max_length": 300
+          },
+          "verified": {
+            "type": "boolean",
+            "required": true
+          }
+        },
+        "validation": {
+          "blocked_signal_types_not_allowed": true,
+          "must_be_real_and_observed": true,
+          "invented_or_assumed_signals_rejected": true
+        }
+      },
+      {
+        "field": "notes",
+        "label": "Operator Notes",
+        "type": "string",
+        "required": false,
+        "placeholder": "Optional factual notes only. No invented urgency or assumptions.",
+        "validation": {
+          "max_length": 2000,
+          "factual_only": true
+        }
+      }
+    ]
+  },
+  "validation_rules": {
+    "batch_rules": [
+      {
+        "rule_id": "batch_feedback_required",
+        "description": "feedback_status must exist before a new batch can move into preflight."
+      },
+      {
+        "rule_id": "run_status_required_when_feedback_missing",
+        "description": "If feedback_status is 'missing' or 'missing_unknown', run_status must be confirmed before drafting outreach."
+      }
+    ],
+    "lead_rules": [
+      {
+        "rule_id": "required_fields_present",
+        "description": "lead_name, company_name, lead_source, lane_classification, geography, and real_observed_signals are required."
+      },
+      {
+        "rule_id": "lead_source_must_be_real",
+        "description": "lead_source cannot be inferred or left ambiguous."
+      },
+      {
+        "rule_id": "lane_locked_to_v1",
+        "description": "lane_classification must be one of the V1 lanes or explicitly marked out_of_v1_scope."
+      },
+      {
+        "rule_id": "geography_locked_to_v1",
+        "description": "geography must be Baltimore, Towson, Howard County, geography_unconfirmed, or out_of_geo_scope."
+      },
+      {
+        "rule_id": "real_signals_only",
+        "description": "Every signal must map to an allowed signal_type and include a source excerpt plus source location."
+      },
+      {
+        "rule_id": "blocked_signals_rejected",
+        "description": "Any invented pain, urgency, trigger event, staffing change, expansion event, or compliance issue invalidates the lead for drafting until removed."
+      },
+      {
+        "rule_id": "weak_signals_must_be_labeled",
+        "description": "Weak signals are allowed only when explicitly labeled weak and backed by a real source. They cannot be presented as strong triggers."
+      }
+    ]
+  },
+  "automation_payload_template": {
+    "batch": {
+      "batch_id": "",
+      "feedback_status": "missing_unknown",
+      "feedback_notes": "",
+      "run_status": "",
+      "results_log_status": ""
+    },
+    "leads": [
+      {
+        "lead_name": "",
+        "company_name": "",
+        "lead_source": "",
+        "lane_classification": "",
+        "geography": "",
+        "website_url": "",
+        "profile_url": "",
+        "contact_name": "",
+        "real_observed_signals": [
+          {
+            "signal_type": "",
+            "signal_strength": "",
+            "source_excerpt": "",
+            "source_location": "",
+            "verified": true
+          }
+        ],
+        "notes": ""
+      }
+    ]
+  },
+  "preflight_trigger_map": {
+    "lead_source_missing": "pause_and_ask_brian",
+    "lane_classification_missing": "pause_and_ask_brian",
+    "geography_missing_or_unconfirmed": "pause_and_ask_brian",
+    "feedback_status_missing": "pause_and_ask_brian",
+    "blocked_signal_present": "block_draft_generation",
+    "out_of_scope_lane": "mark_out_of_scope",
+    "out_of_scope_geography": "mark_out_of_scope"
+  }
+}

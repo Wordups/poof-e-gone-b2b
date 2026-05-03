@@ -1,0 +1,462 @@
+{
+  "machine_id": "lead_outreach_operator_v1",
+  "version": "1.0.0",
+  "description": "Executable V1 outreach operator state machine for Brian. Audits leads, enforces approval gates, scores only from real signals, drafts outreach, and blocks send actions until explicit approval exists.",
+  "owner": "Brian",
+  "scope": {
+    "verticals": [
+      "dental_practice",
+      "law_firm",
+      "office_move_out",
+      "it_partner"
+    ],
+    "geographies": [
+      "baltimore",
+      "towson",
+      "howard_county"
+    ],
+    "expansion_policy": "blocked_until_explicit_instruction"
+  },
+  "rules": {
+    "audit_before_acting": true,
+    "approval_required_before_send": true,
+    "feedback_required_before_new_batch": true,
+    "real_signals_only": true,
+    "invented_urgency_blocked": true,
+    "invented_trigger_events_blocked": true,
+    "invented_pain_blocked": true,
+    "invented_expansion_events_blocked": true,
+    "invented_compliance_issues_blocked": true
+  },
+  "input_schema": {
+    "batch": {
+      "required_fields": [
+        "batch_id",
+        "feedback_status"
+      ],
+      "optional_fields": [
+        "feedback_notes",
+        "run_status",
+        "results_log_status"
+      ]
+    },
+    "lead": {
+      "required_fields": [
+        "lead_name",
+        "company_name",
+        "lead_source",
+        "lane_classification",
+        "geography",
+        "real_observed_signals"
+      ],
+      "optional_fields": [
+        "website_url",
+        "profile_url",
+        "contact_name",
+        "notes"
+      ]
+    }
+  },
+  "lane_objects": {
+    "dental_practice": {
+      "label": "Dental practice",
+      "in_v1_scope": true,
+      "priority_weight": 1.0
+    },
+    "law_firm": {
+      "label": "Law firm",
+      "in_v1_scope": true,
+      "priority_weight": 1.0
+    },
+    "office_move_out": {
+      "label": "Office move-out",
+      "in_v1_scope": true,
+      "priority_weight": 0.95
+    },
+    "it_partner": {
+      "label": "IT partner",
+      "in_v1_scope": true,
+      "priority_weight": 0.9
+    },
+    "out_of_v1_scope": {
+      "label": "Out of V1 scope",
+      "in_v1_scope": false,
+      "priority_weight": 0.0
+    }
+  },
+  "geography_objects": {
+    "baltimore": {
+      "label": "Baltimore",
+      "in_scope": true,
+      "weight": 1.0
+    },
+    "towson": {
+      "label": "Towson",
+      "in_scope": true,
+      "weight": 1.0
+    },
+    "howard_county": {
+      "label": "Howard County",
+      "in_scope": true,
+      "weight": 1.0
+    },
+    "geography_unconfirmed": {
+      "label": "Geography unconfirmed",
+      "in_scope": false,
+      "weight": 0.0
+    },
+    "out_of_geo_scope": {
+      "label": "Out of geo scope",
+      "in_scope": false,
+      "weight": 0.0
+    }
+  },
+  "signal_policy": {
+    "acceptable_signal_types": [
+      "real_website_copy",
+      "real_service_page",
+      "real_local_geography",
+      "real_industry_fit",
+      "real_operational_clue",
+      "real_tech_clue",
+      "real_compliance_clue",
+      "real_office_move_relevance",
+      "real_asset_disposal_relevance",
+      "real_partner_fit_indicator"
+    ],
+    "blocked_signal_types": [
+      "invented_pain",
+      "invented_urgency",
+      "invented_staffing_change",
+      "invented_expansion_event",
+      "invented_compliance_issue",
+      "invented_trigger_event"
+    ],
+    "signal_strength_values": {
+      "weak": 1,
+      "moderate": 2,
+      "strong": 3
+    }
+  },
+  "scoring_model": {
+    "weights": {
+      "lane_in_scope": 30,
+      "geography_in_scope": 25,
+      "real_signal_strength_total": 30,
+      "operational_relevance": 10,
+      "compliance_or_disposal_relevance": 5
+    },
+    "caps": {
+      "real_signal_strength_total_max": 30,
+      "operational_relevance_max": 10,
+      "compliance_or_disposal_relevance_max": 5
+    },
+    "calculations": {
+      "lane_in_scope": {
+        "if_true": 30,
+        "if_false": 0
+      },
+      "geography_in_scope": {
+        "if_true": 25,
+        "if_false": 0
+      },
+      "real_signal_strength_total": {
+        "formula": "min(sum(signal_strength_values for all accepted real_observed_signals) * 3, 30)"
+      },
+      "operational_relevance": {
+        "formula": "10 if lead has clear real operational fit, 5 if partial indirect fit, 0 if weak or assumed fit"
+      },
+      "compliance_or_disposal_relevance": {
+        "formula": "5 if lead has explicit real compliance/data/asset-disposal relevance, 0 otherwise"
+      },
+      "final_score_numeric": {
+        "formula": "lane_in_scope + geography_in_scope + real_signal_strength_total + operational_relevance + compliance_or_disposal_relevance"
+      }
+    },
+    "score_bands": {
+      "hot": {
+        "min": 75,
+        "max": 100,
+        "requirements": [
+          "lane_in_scope == true",
+          "geography_in_scope == true",
+          "accepted_real_signal_count >= 2",
+          "at_least_one_signal_strength == strong"
+        ]
+      },
+      "warm": {
+        "min": 50,
+        "max": 74,
+        "requirements": [
+          "lane_in_scope == true",
+          "geography_in_scope == true"
+        ]
+      },
+      "cold": {
+        "min": 1,
+        "max": 49,
+        "requirements": [
+          "lead_not_marked_out_of_scope"
+        ]
+      },
+      "out_of_scope": {
+        "min": 0,
+        "max": 0,
+        "requirements": [
+          "lane_in_scope == false or geography_in_scope == false"
+        ]
+      }
+    }
+  },
+  "questions": {
+    "missing_lead_source": "What is the lead source for this account?",
+    "missing_lane": "How do you want this lead classified: dental, law, office move-out, or IT partner?",
+    "missing_feedback_status": "Do we have feedback from the last batch, or is this the first run?",
+    "missing_geography": "Can you confirm this lead is in Baltimore, Towson, or Howard County?",
+    "missing_run_status": "Is this the first run, or should I log results before processing the next batch?"
+  },
+  "output_contract": {
+    "required_sections": [
+      "batch_status",
+      "lead_audit",
+      "missing_confirmations",
+      "draft_outreach",
+      "approval_gate"
+    ],
+    "approval_gate_value": "Awaiting Brian approval before send"
+  },
+  "states": {
+    "idle": {
+      "type": "start",
+      "description": "Waiting for a new batch."
+    },
+    "check_previous_feedback": {
+      "type": "decision",
+      "description": "Validate whether previous batch feedback exists before processing a new batch.",
+      "required_inputs": [
+        "batch.feedback_status"
+      ]
+    },
+    "request_feedback_status": {
+      "type": "human_gate",
+      "description": "Ask Brian whether this is the first run or whether results need to be logged because feedback status is missing.",
+      "questions": [
+        "missing_feedback_status",
+        "missing_run_status"
+      ]
+    },
+    "apply_feedback": {
+      "type": "action",
+      "description": "Incorporate feedback from the previous batch before auditing new leads.",
+      "required_inputs": [
+        "batch.feedback_notes"
+      ]
+    },
+    "audit_batch": {
+      "type": "action",
+      "description": "Audit each lead for source, lane, geography, and real signals only."
+    },
+    "validate_lead_fields": {
+      "type": "decision",
+      "description": "Check whether the required lead fields exist for each lead."
+    },
+    "request_missing_confirmations": {
+      "type": "human_gate",
+      "description": "Pause and ask Brian only for the missing lead items."
+    },
+    "classify_lane": {
+      "type": "decision",
+      "description": "Map the lead to a V1 lane or mark it out of scope."
+    },
+    "check_geography": {
+      "type": "decision",
+      "description": "Confirm the lead is in Baltimore, Towson, or Howard County."
+    },
+    "evaluate_signals": {
+      "type": "action",
+      "description": "Filter for acceptable real signals and reject blocked or invented signals."
+    },
+    "score_lead": {
+      "type": "action",
+      "description": "Calculate numeric score and assign hot/warm/cold/out-of-scope label."
+    },
+    "preflight_gate": {
+      "type": "decision",
+      "description": "Verify all preflight questions are answered before drafting outreach.",
+      "checks": [
+        "lead_source_known",
+        "lane_known",
+        "geography_confirmed",
+        "feedback_status_known",
+        "run_status_known_when_feedback_missing"
+      ]
+    },
+    "draft_outreach": {
+      "type": "action",
+      "description": "Generate outreach draft using only approved real signals."
+    },
+    "await_brian_approval": {
+      "type": "human_gate",
+      "description": "Hold all messages until Brian explicitly approves the draft."
+    },
+    "approved_for_send": {
+      "type": "terminal_guarded",
+      "description": "The draft is approved by Brian and can be handed to a separate sending system."
+    },
+    "blocked_send": {
+      "type": "terminal",
+      "description": "No send action is allowed because approval is missing or scope/rules were violated."
+    },
+    "out_of_scope": {
+      "type": "terminal",
+      "description": "Lead is out of V1 scope and must not proceed to outreach drafting."
+    }
+  },
+  "transitions": [
+    {
+      "from": "idle",
+      "to": "check_previous_feedback",
+      "condition": "new_batch_received"
+    },
+    {
+      "from": "check_previous_feedback",
+      "to": "request_feedback_status",
+      "condition": "batch.feedback_status is null or batch.feedback_status == 'missing_unknown'"
+    },
+    {
+      "from": "check_previous_feedback",
+      "to": "apply_feedback",
+      "condition": "batch.feedback_status == 'present'"
+    },
+    {
+      "from": "check_previous_feedback",
+      "to": "audit_batch",
+      "condition": "batch.feedback_status == 'missing' and batch.run_status == 'first_run_confirmed'"
+    },
+    {
+      "from": "request_feedback_status",
+      "to": "audit_batch",
+      "condition": "Brian confirms first run or logging instruction"
+    },
+    {
+      "from": "apply_feedback",
+      "to": "audit_batch",
+      "condition": "feedback_applied == true"
+    },
+    {
+      "from": "audit_batch",
+      "to": "validate_lead_fields",
+      "condition": "lead_loaded"
+    },
+    {
+      "from": "validate_lead_fields",
+      "to": "request_missing_confirmations",
+      "condition": "one_or_more_required_fields_missing == true"
+    },
+    {
+      "from": "validate_lead_fields",
+      "to": "classify_lane",
+      "condition": "all_required_fields_present == true"
+    },
+    {
+      "from": "request_missing_confirmations",
+      "to": "validate_lead_fields",
+      "condition": "Brian supplied missing confirmations"
+    },
+    {
+      "from": "classify_lane",
+      "to": "out_of_scope",
+      "condition": "lane_classification == 'out_of_v1_scope'"
+    },
+    {
+      "from": "classify_lane",
+      "to": "check_geography",
+      "condition": "lane_classification in ['dental_practice', 'law_firm', 'office_move_out', 'it_partner']"
+    },
+    {
+      "from": "check_geography",
+      "to": "request_missing_confirmations",
+      "condition": "geography == 'geography_unconfirmed'"
+    },
+    {
+      "from": "check_geography",
+      "to": "out_of_scope",
+      "condition": "geography == 'out_of_geo_scope'"
+    },
+    {
+      "from": "check_geography",
+      "to": "evaluate_signals",
+      "condition": "geography in ['baltimore', 'towson', 'howard_county']"
+    },
+    {
+      "from": "evaluate_signals",
+      "to": "blocked_send",
+      "condition": "blocked_signal_detected == true"
+    },
+    {
+      "from": "evaluate_signals",
+      "to": "score_lead",
+      "condition": "all_signals_are_real_or_filtered == true"
+    },
+    {
+      "from": "score_lead",
+      "to": "preflight_gate",
+      "condition": "score_assigned == true"
+    },
+    {
+      "from": "preflight_gate",
+      "to": "request_missing_confirmations",
+      "condition": "preflight_failed == true"
+    },
+    {
+      "from": "preflight_gate",
+      "to": "draft_outreach",
+      "condition": "preflight_passed == true and score_label != 'out_of_scope'"
+    },
+    {
+      "from": "draft_outreach",
+      "to": "await_brian_approval",
+      "condition": "draft_created == true"
+    },
+    {
+      "from": "await_brian_approval",
+      "to": "approved_for_send",
+      "condition": "Brian approval == explicit_yes"
+    },
+    {
+      "from": "await_brian_approval",
+      "to": "blocked_send",
+      "condition": "Brian approval != explicit_yes"
+    }
+  ],
+  "automation_engine_contract": {
+    "send_action_allowed_only_in_state": [
+      "approved_for_send"
+    ],
+    "send_action_blocked_in_states": [
+      "idle",
+      "check_previous_feedback",
+      "request_feedback_status",
+      "apply_feedback",
+      "audit_batch",
+      "validate_lead_fields",
+      "request_missing_confirmations",
+      "classify_lane",
+      "check_geography",
+      "evaluate_signals",
+      "score_lead",
+      "preflight_gate",
+      "draft_outreach",
+      "await_brian_approval",
+      "blocked_send",
+      "out_of_scope"
+    ],
+    "required_human_approval_events": [
+      "lane_confirmation_when_missing",
+      "lead_source_confirmation_when_missing",
+      "geography_confirmation_when_missing",
+      "feedback_status_confirmation_when_missing",
+      "final_message_send_approval"
+    ]
+  }
+}
