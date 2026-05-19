@@ -218,60 +218,6 @@
 
   .divider { height: 1px; background: var(--border); margin: 0 48px; }
 
-  /* FORM PANEL */
-  .form-overlay {
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(17,17,17,0.5); z-index: 998;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-  }
-  .form-overlay.open { opacity: 1; pointer-events: all; }
-  .form-panel {
-    position: fixed; top: 0; right: 0; bottom: 0;
-    width: 480px; max-width: 100vw;
-    background: var(--card); z-index: 999;
-    transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto; box-shadow: -8px 0 40px rgba(0,0,0,0.12);
-    display: flex; flex-direction: column;
-  }
-  .form-panel.open { transform: translateX(0); }
-  .form-panel-header {
-    padding: 32px 32px 24px; border-bottom: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: flex-start;
-    background: var(--bg); position: sticky; top: 0; z-index: 1;
-  }
-  .form-panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--white); }
-  .form-panel-sub { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-top: 4px; }
-  .form-close { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 18px; cursor: pointer; padding: 8px 12px; transition: all 0.2s; line-height: 1; }
-  .form-close:hover { border-color: var(--accent); color: var(--accent); }
-  .form-body { padding: 28px 32px 40px; flex: 1; }
-  .form-grid { display: flex; flex-direction: column; gap: 18px; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
-  input, select, textarea {
-    background: var(--bg); border: 1px solid var(--border);
-    color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px;
-    padding: 12px 14px; outline: none; transition: border-color 0.2s; width: 100%; -webkit-appearance: none;
-  }
-  input:focus, select:focus, textarea:focus { border-color: var(--green); background: #fff; }
-  input::placeholder, textarea::placeholder { color: #bbb; }
-  select option { background: var(--card); }
-  textarea { resize: vertical; min-height: 100px; }
-  .form-submit {
-    width: 100%; background: var(--accent); color: #fff;
-    font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500;
-    letter-spacing: 2px; padding: 16px; border: none; cursor: pointer;
-    text-transform: uppercase; transition: background 0.2s; margin-top: 8px;
-    box-shadow: 0 4px 16px rgba(232,78,15,0.25);
-  }
-  .form-submit:hover { background: var(--accent-dim); }
-  .form-note { margin-top: 12px; font-size: 11px; color: var(--muted); text-align: center; font-family: 'DM Mono', monospace; }
-  .form-success-panel { display: none; text-align: center; padding: 60px 32px; }
-  .form-success-panel .check { font-size: 48px; margin-bottom: 20px; }
-  .form-success-panel h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--green); margin-bottom: 12px; }
-  .form-success-panel p { color: var(--muted); font-size: 15px; line-height: 1.6; }
-
   /* FOOTER */
   footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: var(--dark); }
   .footer-logo { display: flex; align-items: center; gap: 10px; }
@@ -352,10 +298,8 @@
     .footer-links { flex-wrap: wrap; gap: 12px; }
     .divider { margin: 0 20px; }
     .step { grid-template-columns: 52px 1fr; gap: 16px; }
-    .form-panel { width: 100vw; }
     .chat-window { width: calc(100vw - 24px); right: 12px; }
     .chat-bubble, .chat-ping { right: 12px; }
-    .form-row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -371,7 +315,7 @@
     <a href="#clients">Who We Serve</a>
     <a href="#how-it-works">Process</a>
   </div>
-  <button class="nav-cta" onclick="openForm()">Schedule Secure Pickup</button>
+  <a class="nav-cta" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Schedule Secure Pickup</a>
 </nav>
 
 <section class="hero">
@@ -380,7 +324,7 @@
   <p class="hero-sub">Old laptops and hard drives sitting in storage become a compliance risk. We pick them up, destroy the data, and issue a Certificate of Destruction — mobile, same day, no minimums.</p>
   <p class="hero-text-cta">Fast quote via text: <span>(202) 596-1361</span></p>
   <div class="hero-actions">
-    <button class="btn-primary" onclick="openForm()">Schedule Secure Pickup</button>
+    <a class="btn-primary" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Schedule Secure Pickup</a>
     <a href="#services" class="btn-ghost">See All Services</a>
   </div>
   <div class="hero-verticals">
@@ -489,7 +433,7 @@
       <div class="section-tag">// The Edge Nobody Else Has</div>
       <div class="ai-title">AFTER CLEANUP,<br>WE HELP YOU <span class="amber">MODERNIZE.</span></div>
       <p class="ai-desc">What stays in your office should work smarter. We configure AI tools, deploy device management, and train your team — while we're already there.</p>
-      <button class="btn-primary" onclick="openForm()" style="background: var(--accent);">Schedule Secure Pickup</button>
+      <a class="btn-primary" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener" style="background: var(--accent);">Schedule Secure Pickup</a>
     </div>
     <div>
       <ul class="ai-list">
@@ -552,7 +496,7 @@
       <div class="step-content">
         <div class="step-header"><h3>Submit Your Request</h3><span class="step-arrow">+</span></div>
         <div class="step-body">
-          <p>Fill out our intake form or text us directly at (202) 596-1361. Tell us what you need — data destruction, pickup, AI setup, MDM, or all of the above.</p>
+          <p>Click any "Schedule Secure Pickup" button to get a quote on Square, or text us directly at (202) 596-1361. Tell us what you need — data destruction, pickup, AI setup, MDM, or all of the above.</p>
           <ul class="step-list">
             <li>Takes about 2 minutes to complete</li>
             <li>Or just text us a description of what you have</li>
@@ -616,7 +560,7 @@
       <div class="section-tag">// Why It Matters</div>
       <div class="compliance-title">DATA <span class="accent">LIABILITY</span> IS REAL.</div>
       <p class="compliance-desc">Improperly disposed electronics are one of the most common sources of data breaches for small businesses. A Certificate of Destruction is your proof you handled it correctly — and we bring it to your door.</p>
-      <button class="btn-primary" onclick="openForm()">Schedule Secure Pickup</button>
+      <a class="btn-primary" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Schedule Secure Pickup</a>
     </div>
     <div>
       <ul class="cert-list">
@@ -645,87 +589,6 @@
   <div class="footer-info">Baltimore, MD &nbsp;·&nbsp; (202) 596-1361 &nbsp;·&nbsp; © 2026 Poof E Gone</div>
 </footer>
 
-<div class="form-overlay" id="formOverlay" onclick="closeForm()"></div>
-<div class="form-panel" id="formPanel">
-  <div class="form-panel-header">
-    <div>
-      <div class="form-panel-title">REQUEST A VISIT</div>
-      <div class="form-panel-sub">// We respond within one business day</div>
-    </div>
-    <button class="form-close" onclick="closeForm()">✕</button>
-  </div>
-  <div class="form-body">
-    <form id="intakeForm" name="intake" method="POST" action="/" netlify onsubmit="return false;">
-      <input type="hidden" name="form-name" value="intake" />
-      <div class="form-grid">
-        <div class="form-row">
-          <div class="form-group"><label>Company Name</label><input type="text" id="company" name="company" placeholder="Acme Corp" /></div>
-          <div class="form-group"><label>Your Name</label><input type="text" id="name" name="name" placeholder="Jane Smith" /></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>Email</label><input type="email" id="email" name="email" placeholder="jane@acme.com" /></div>
-          <div class="form-group"><label>Phone</label><input type="tel" id="phone" name="phone" placeholder="(410) 000-0000" /></div>
-        </div>
-        <div class="form-group">
-          <label>Industry</label>
-          <select id="industry" name="industry">
-            <option value="" disabled selected>Select your industry</option>
-            <option>Dental Practice</option><option>Law Firm</option>
-            <option>Medical / Healthcare</option><option>Accounting / Finance</option>
-            <option>Property Management</option><option>IT / Technology</option>
-            <option>Government</option><option>General Office / Corporate</option><option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Primary Service Needed</label>
-          <select id="service" name="service">
-            <option value="" disabled selected>Select primary service</option>
-            <option>Certified Data Destruction</option>
-            <option>IT Asset Pickup &amp; Disposal</option>
-            <option>PC Cleaning &amp; Tune-Up</option>
-            <option>Hardware Upgrade (RAM / SSD)</option>
-            <option>Virus &amp; Malware Removal</option>
-            <option>AI Setup — Remote (1–3 users)</option>
-            <option>AI Setup — On-Site Team Training</option>
-            <option>MDM Setup &amp; Management (Intune / Jamf / MobileIron)</option>
-            <option>Multiple Services — I'll explain below</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Number of Devices</label>
-            <select id="quantity" name="quantity">
-              <option value="" disabled selected>Select range</option>
-              <option>1–5 devices</option><option>6–20 devices</option>
-              <option>21–50 devices</option><option>50+ devices</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Timeline</label>
-            <select id="timeline" name="timeline">
-              <option value="" disabled selected>Select timing</option>
-              <option>As soon as possible</option>
-              <option>Within the next week</option>
-              <option>Flexible / just getting a quote</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Additional Notes</label>
-          <textarea id="notes" name="notes" placeholder="Device types, compliance needs, number of staff for AI training, MDM platform preference..."></textarea>
-        </div>
-      </div>
-      <button class="form-submit" type="button" onclick="submitForm()">Submit Service Request →</button>
-      <p class="form-note">🔒 We do not store sensitive data. Scheduling purposes only.</p>
-    </form>
-    <div class="form-success-panel" id="formSuccess">
-      <div class="check">✅</div>
-      <h3>Request Received</h3>
-      <p>We'll follow up within one business day.<br>Need it faster? Text us at <strong style="color:var(--white)">(202) 596-1361</strong></p>
-    </div>
-  </div>
-</div>
-
 <div class="chat-ping" id="chatPing">🔐 Data destruction · HIPAA · COD issued same day.</div>
 <button class="chat-bubble" id="chatBubble" onclick="toggleChat()">
   <span class="bubble-icon">💬</span>
@@ -751,40 +614,6 @@
     const isOpen = el.classList.contains('open');
     document.querySelectorAll('.expandable').forEach(s => s.classList.remove('open'));
     if (!isOpen) el.classList.add('open');
-  }
-  function openForm() {
-    document.getElementById('formPanel').classList.add('open');
-    document.getElementById('formOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeForm() {
-    document.getElementById('formPanel').classList.remove('open');
-    document.getElementById('formOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeForm(); });
-  async function submitForm() {
-    const required = ['company','name','email','phone'];
-    let valid = true;
-    required.forEach(id => {
-      const el = document.getElementById(id);
-      if (!el.value.trim()) { el.style.borderColor = '#e84e0f'; valid = false; }
-      else { el.style.borderColor = '#d8d0c0'; }
-    });
-    if (!valid) return;
-    const form = document.getElementById('intakeForm');
-    const payload = new URLSearchParams(new FormData(form)).toString();
-    try {
-      await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: payload
-      });
-      form.style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-    } catch (e) {
-      alert('Submission failed. Please text us at (202) 596-1361.');
-    }
   }
   let chatHistory = [], chatOpen = false;
   function toggleChat() {

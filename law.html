@@ -89,33 +89,6 @@
 
   .divider { height: 1px; background: var(--border); margin: 0 48px; }
 
-  .form-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(17,17,17,0.5); z-index: 998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-  .form-overlay.open { opacity: 1; pointer-events: all; }
-  .form-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 480px; max-width: 100vw; background: var(--card); z-index: 999; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; box-shadow: -8px 0 40px rgba(0,0,0,0.12); display: flex; flex-direction: column; }
-  .form-panel.open { transform: translateX(0); }
-  .form-panel-header { padding: 32px 32px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; background: var(--bg); position: sticky; top: 0; z-index: 1; }
-  .form-panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--white); }
-  .form-panel-sub { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-top: 4px; }
-  .form-close { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 18px; cursor: pointer; padding: 8px 12px; transition: all 0.2s; line-height: 1; }
-  .form-close:hover { border-color: var(--accent); color: var(--accent); }
-  .form-body { padding: 28px 32px 40px; flex: 1; }
-  .form-grid { display: flex; flex-direction: column; gap: 18px; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
-  input, select, textarea { background: var(--bg); border: 1px solid var(--border); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 12px 14px; outline: none; transition: border-color 0.2s; width: 100%; -webkit-appearance: none; }
-  input:focus, select:focus, textarea:focus { border-color: var(--green); background: #fff; }
-  input::placeholder, textarea::placeholder { color: #bbb; }
-  select option { background: var(--card); }
-  textarea { resize: vertical; min-height: 100px; }
-  .form-submit { width: 100%; background: var(--accent); color: #fff; font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 2px; padding: 16px; border: none; cursor: pointer; text-transform: uppercase; transition: background 0.2s; margin-top: 8px; box-shadow: 0 4px 16px rgba(232,78,15,0.25); }
-  .form-submit:hover { background: var(--accent-dim); }
-  .form-note { margin-top: 12px; font-size: 11px; color: var(--muted); text-align: center; font-family: 'DM Mono', monospace; }
-  .form-success-panel { display: none; text-align: center; padding: 60px 32px; }
-  .form-success-panel .check { font-size: 48px; margin-bottom: 20px; }
-  .form-success-panel h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--green); margin-bottom: 12px; }
-  .form-success-panel p { color: var(--muted); font-size: 15px; line-height: 1.6; }
-
   footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: var(--dark); }
   .footer-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: var(--green); }
   .footer-logo-text span { color: var(--white); }
@@ -165,10 +138,8 @@
     footer { padding: 28px 20px; flex-direction: column; align-items: flex-start; }
     .divider { margin: 0 20px; }
     .step { grid-template-columns: 52px 1fr; gap: 16px; }
-    .form-panel { width: 100vw; }
     .chat-window { width: calc(100vw - 24px); right: 12px; }
     .chat-bubble { right: 12px; }
-    .form-row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -177,7 +148,7 @@
 <nav>
   <div class="nav-logo-text">POOF E <span>GONE</span></div>
   <a href="index.html" class="nav-back">← All Services</a>
-  <button class="nav-cta" onclick="openForm()">Schedule Pickup</button>
+  <a class="nav-cta" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Schedule Pickup</a>
 </nav>
 
 <section class="hero">
@@ -186,7 +157,7 @@
   <p class="hero-sub">Retired laptops, old servers, and surplus workstations sitting in your storage room hold confidential client files. We pick them up, destroy the data, and issue documentation — so your firm is covered.</p>
   <p class="hero-text-cta">Fast quote via text: <span>(202) 596-1361</span></p>
   <div class="hero-actions">
-    <button class="btn-primary" onclick="openForm()">Schedule Secure Pickup</button>
+    <a class="btn-primary" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Schedule Secure Pickup</a>
     <a href="#how" class="btn-ghost">See How It Works</a>
   </div>
 </section>
@@ -253,7 +224,7 @@
       <div class="section-tag">// Our Solution</div>
       <div class="offer-title">SECURE IT<br>ASSET <span class="amber">DISPOSAL</span><br>FOR LAW.</div>
       <p class="offer-desc">We handle pickup, on-site destruction, and documentation. Your client confidentiality obligations stay intact. We give you the paperwork to prove it.</p>
-      <button class="btn-primary" onclick="openForm()">Schedule Secure Pickup</button>
+      <a class="btn-primary" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Schedule Secure Pickup</a>
     </div>
     <div>
       <ul class="offer-list">
@@ -311,7 +282,7 @@
 <div class="cta-section">
   <h2 style="color:var(--bg)">CLEAR YOUR STORAGE.<br>CLOSE THE LIABILITY.</h2>
   <p>One conversation is all it takes. We quote same day, schedule around your hours, and handle everything on-site with full documentation.</p>
-  <button class="btn-accent" onclick="openForm()">Schedule Secure Pickup</button>
+  <a class="btn-accent" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Schedule Secure Pickup</a>
 </div>
 
 <footer>
@@ -319,73 +290,6 @@
   <div class="footer-info">Baltimore, MD &nbsp;·&nbsp; (202) 596-1361</div>
   <div class="footer-info">© 2026 Poof E Gone · Secure IT Asset Disposal</div>
 </footer>
-
-<div class="form-overlay" id="formOverlay" onclick="closeForm()"></div>
-<div class="form-panel" id="formPanel">
-  <div class="form-panel-header">
-    <div>
-      <div class="form-panel-title">SCHEDULE PICKUP</div>
-      <div class="form-panel-sub">// Law Firm — Confidential Data Destruction</div>
-    </div>
-    <button class="form-close" onclick="closeForm()">✕</button>
-  </div>
-  <div class="form-body">
-    <form id="intakeForm" name="intake" method="POST" action="/" netlify onsubmit="return false;">
-      <input type="hidden" name="form-name" value="intake" />
-      <div class="form-grid">
-        <div class="form-row">
-          <div class="form-group"><label>Firm Name</label><input type="text" id="company" name="company" placeholder="Smith &amp; Associates" /></div>
-          <div class="form-group"><label>Your Name</label><input type="text" id="name" name="name" placeholder="Jane Smith, Esq." /></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>Email</label><input type="email" id="email" name="email" placeholder="jsmith@firm.com" /></div>
-          <div class="form-group"><label>Phone</label><input type="tel" id="phone" name="phone" placeholder="(410) 000-0000" /></div>
-        </div>
-        <div class="form-group">
-          <label>What do you have?</label>
-          <select id="service" name="service">
-            <option value="" disabled selected>Select device type</option>
-            <option>Attorney laptops / workstations</option>
-            <option>On-premise server(s)</option>
-            <option>Hard drives and SSDs only</option>
-            <option>Mixed office equipment</option>
-            <option>Mix of devices — I'll explain below</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Number of Devices</label>
-            <select id="quantity" name="quantity">
-              <option value="" disabled selected>Select range</option>
-              <option>1–5 devices</option><option>6–20 devices</option>
-              <option>21–50 devices</option><option>50+ devices</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Timeline</label>
-            <select id="timeline" name="timeline">
-              <option value="" disabled selected>Select timing</option>
-              <option>As soon as possible</option>
-              <option>Within the next week</option>
-              <option>Flexible / just getting a quote</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Additional Notes</label>
-          <textarea id="notes" name="notes" placeholder="Device details, preferred scheduling (before/after hours), any compliance documentation requirements..."></textarea>
-        </div>
-      </div>
-      <button class="form-submit" type="button" onclick="submitForm()">Request Pickup →</button>
-      <p class="form-note">🔒 Confidential process. COD issued per device. No data leaves undocumented.</p>
-    </form>
-    <div class="form-success-panel" id="formSuccess">
-      <div class="check">✅</div>
-      <h3>Request Received</h3>
-      <p>We'll follow up within one business day.<br>Need it faster? Text us at <strong style="color:var(--white)">(202) 596-1361</strong></p>
-    </div>
-  </div>
-</div>
 
 <button class="chat-bubble" id="chatBubble" onclick="toggleChat()">
   <span class="bubble-icon">💬</span>
@@ -407,24 +311,6 @@
 </div>
 
 <script>
-  function openForm() { document.getElementById('formPanel').classList.add('open'); document.getElementById('formOverlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closeForm() { document.getElementById('formPanel').classList.remove('open'); document.getElementById('formOverlay').classList.remove('open'); document.body.style.overflow = ''; }
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeForm(); });
-  async function submitForm() {
-    const required = ['company','name','email','phone'];
-    let valid = true;
-    required.forEach(id => { const el = document.getElementById(id); if (!el.value.trim()) { el.style.borderColor = '#e84e0f'; valid = false; } else { el.style.borderColor = '#d8d0c0'; } });
-    if (!valid) return;
-    const form = document.getElementById('intakeForm');
-    const payload = new URLSearchParams(new FormData(form)).toString();
-    try {
-      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: payload });
-      form.style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-    } catch (e) {
-      alert('Submission failed. Please text us at (202) 596-1361.');
-    }
-  }
   let chatHistory = [], chatOpen = false;
   function toggleChat() {
     chatOpen = !chatOpen;
