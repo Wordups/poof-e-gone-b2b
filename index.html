@@ -235,59 +235,6 @@
   .hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
   .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
 
-  /* CHATBOT */
-  .chat-bubble {
-    position: fixed; bottom: 28px; right: 28px; z-index: 997;
-    width: 54px; height: 54px; border-radius: 50%;
-    background: var(--accent); border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(232,78,15,0.4);
-    transition: transform 0.2s, background 0.2s; font-size: 22px;
-  }
-  .chat-bubble:hover { transform: scale(1.08); background: var(--accent-dim); }
-  .chat-bubble .bubble-close { display: none; font-size: 18px; color: #fff; font-weight: bold; }
-  .chat-bubble.open .bubble-icon { display: none; }
-  .chat-bubble.open .bubble-close { display: block; }
-  .chat-ping {
-    position: fixed; bottom: 90px; right: 28px; z-index: 996;
-    background: var(--white); border: 1px solid rgba(255,255,255,0.1);
-    color: var(--bg); font-size: 12px; padding: 10px 14px;
-    max-width: 200px; line-height: 1.5;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    animation: fadeUp 0.5s 2.5s both;
-  }
-  .chat-ping.hidden { display: none; }
-  .chat-window {
-    position: fixed; bottom: 94px; right: 28px; z-index: 996;
-    width: 340px; height: 480px;
-    background: var(--card); border: 1px solid var(--border);
-    display: flex; flex-direction: column;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
-    transform: translateY(20px); opacity: 0; pointer-events: none;
-    transition: all 0.3s ease;
-  }
-  .chat-window.open { transform: translateY(0); opacity: 1; pointer-events: all; }
-  .chat-header { background: var(--green); padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
-  .chat-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
-  .chat-header-name { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; color: #fff; }
-  .chat-header-status { font-size: 10px; color: rgba(255,255,255,0.8); font-family: 'DM Mono', monospace; }
-  .chat-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; background: var(--bg); scrollbar-width: thin; }
-  .chat-msg { display: flex; gap: 6px; align-items: flex-end; }
-  .chat-msg.user { flex-direction: row-reverse; }
-  .chat-msg-bubble { max-width: 80%; padding: 9px 12px; font-size: 13px; line-height: 1.5; }
-  .chat-msg.bot .chat-msg-bubble { background: var(--card); color: var(--white); border: 1px solid var(--border); }
-  .chat-msg.user .chat-msg-bubble { background: var(--accent); color: #fff; }
-  .chat-typing { display: flex; gap: 4px; align-items: center; padding: 10px 12px; background: var(--card); border: 1px solid var(--border); width: fit-content; }
-  .chat-typing span { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); animation: typing 1.2s infinite; }
-  .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
-  .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes typing { 0%, 60%, 100% { opacity: 0.3; transform: scale(1); } 30% { opacity: 1; transform: scale(1.2); } }
-  .chat-input-area { border-top: 1px solid var(--border); padding: 10px 12px; display: flex; gap: 8px; align-items: center; background: var(--card); }
-  .chat-input { flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 9px 12px; outline: none; resize: none; height: 38px; transition: border-color 0.2s; }
-  .chat-input:focus { border-color: var(--green); }
-  .chat-send { background: var(--green); color: #fff; border: none; width: 38px; height: 38px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; flex-shrink: 0; }
-  .chat-send:hover { background: var(--green-dim); }
-
   @media (max-width: 768px) {
     nav { padding: 14px 20px; }
     .nav-links { display: none; }
@@ -298,8 +245,6 @@
     .footer-links { flex-wrap: wrap; gap: 12px; }
     .divider { margin: 0 20px; }
     .step { grid-template-columns: 52px 1fr; gap: 16px; }
-    .chat-window { width: calc(100vw - 24px); right: 12px; }
-    .chat-bubble, .chat-ping { right: 12px; }
   }
 </style>
 </head>
@@ -589,90 +534,12 @@
   <div class="footer-info">Baltimore, MD &nbsp;·&nbsp; (202) 596-1361 &nbsp;·&nbsp; © 2026 Poof E Gone</div>
 </footer>
 
-<div class="chat-ping" id="chatPing">🔐 Data destruction · HIPAA · COD issued same day.</div>
-<button class="chat-bubble" id="chatBubble" onclick="toggleChat()">
-  <span class="bubble-icon">💬</span>
-  <span class="bubble-close">✕</span>
-</button>
-<div class="chat-window" id="chatWindow">
-  <div class="chat-header">
-    <div class="chat-avatar">⚡</div>
-    <div>
-      <div class="chat-header-name">Poof E Gone</div>
-      <div class="chat-header-status">● Online now</div>
-    </div>
-  </div>
-  <div class="chat-messages" id="chatMessages"></div>
-  <div class="chat-input-area">
-    <textarea class="chat-input" id="chatInput" placeholder="Ask about data destruction, pricing, or scheduling..." rows="1" onkeydown="handleKey(event)"></textarea>
-    <button class="chat-send" onclick="sendMessage()">→</button>
-  </div>
-</div>
-
 <script>
   function toggleStep(el) {
     const isOpen = el.classList.contains('open');
     document.querySelectorAll('.expandable').forEach(s => s.classList.remove('open'));
     if (!isOpen) el.classList.add('open');
   }
-  let chatHistory = [], chatOpen = false;
-  function toggleChat() {
-    chatOpen = !chatOpen;
-    document.getElementById('chatWindow').classList.toggle('open', chatOpen);
-    document.getElementById('chatBubble').classList.toggle('open', chatOpen);
-    document.getElementById('chatPing').classList.add('hidden');
-    if (chatOpen && chatHistory.length === 0) {
-      setTimeout(function() {
-        addBotMessage("Hi — I'm the Poof E Gone assistant. We do certified data destruction, IT asset pickup, PC repair, AI setup, and MDM — all mobile, we come to you. What can I help with?");
-      }, 400);
-    }
-  }
-  function handleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
-  function addBotMessage(text) {
-    var msgs = document.getElementById('chatMessages');
-    var msg = document.createElement('div');
-    msg.className = 'chat-msg bot';
-    msg.innerHTML = '<div class="chat-msg-bubble">' + text + '</div>';
-    msgs.appendChild(msg); msgs.scrollTop = msgs.scrollHeight;
-  }
-  function addUserMessage(text) {
-    var msgs = document.getElementById('chatMessages');
-    var msg = document.createElement('div');
-    msg.className = 'chat-msg user';
-    msg.innerHTML = '<div class="chat-msg-bubble">' + text + '</div>';
-    msgs.appendChild(msg); msgs.scrollTop = msgs.scrollHeight;
-  }
-  function showTyping() {
-    var msgs = document.getElementById('chatMessages');
-    var t = document.createElement('div');
-    t.className = 'chat-msg bot'; t.id = 'typingIndicator';
-    t.innerHTML = '<div class="chat-typing"><span></span><span></span><span></span></div>';
-    msgs.appendChild(t); msgs.scrollTop = msgs.scrollHeight;
-  }
-  function removeTyping() { var t = document.getElementById('typingIndicator'); if (t) t.remove(); }
-  async function sendMessage() {
-    var input = document.getElementById('chatInput');
-    var text = input.value.trim();
-    if (!text) return;
-    input.value = '';
-    addUserMessage(text);
-    chatHistory.push({ role: 'user', content: text });
-    showTyping();
-    try {
-      var res = await fetch('/.netlify/functions/chat', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: chatHistory })
-      });
-      var data = await res.json();
-      var reply = data.reply;
-      chatHistory.push({ role: 'assistant', content: reply });
-      removeTyping(); addBotMessage(reply);
-    } catch(e) {
-      removeTyping();
-      addBotMessage("Sorry, connection issue. Text us directly at (202) 596-1361.");
-    }
-  }
-  setTimeout(function() { if (!chatOpen) document.getElementById('chatPing').style.display = 'block'; }, 3000);
 </script>
 </body>
 </html>
