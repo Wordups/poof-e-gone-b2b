@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Secure Quote — Poof E Gone</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0e14;
+    --dark: #10141c;
+    --card: #161b26;
+    --border: #262c3a;
+    --green: #22d3ee;
+    --green-dim: #0891b2;
+    --accent: #8b5cf6;
+    --accent-dim: #7c3aed;
+    --white: #f2f0eb;
+    --muted: #8b93a5;
+    --shadow: rgba(0,0,0,0.35);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6;
+  }
+
+  nav {
+    position: fixed; top: 16px; left: 16px; right: 16px; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 24px; border: 1px solid var(--border); border-radius: 999px;
+    background: rgba(11,14,20,0.85); backdrop-filter: blur(12px);
+  }
+  .nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--green); text-decoration: none; }
+  .nav-logo-text span { color: var(--white); }
+  .nav-back {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--muted);
+    text-decoration: none; text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--green); }
+
+  main { max-width: 760px; margin: 0 auto; padding: 140px 24px 80px; }
+  .page-tag {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--green);
+    text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .page-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--green); }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 64px);
+    line-height: 1; letter-spacing: 1px; margin-bottom: 16px; color: var(--white);
+  }
+  h1 .accent { color: var(--accent); }
+  .page-sub { font-size: 16px; color: var(--muted); max-width: 520px; margin-bottom: 40px; }
+
+  .form-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+    overflow: hidden; box-shadow: 0 20px 60px var(--shadow);
+  }
+  .form-card iframe { width: 100%; height: 1000px; border: none; display: block; background: var(--white); }
+
+  .form-fallback {
+    margin-top: 20px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted);
+    text-align: center;
+  }
+  .form-fallback a { color: var(--green); }
+
+  footer {
+    padding: 40px 48px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    background: var(--dark);
+  }
+  .footer-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: var(--green); }
+  .footer-logo-text span { color: var(--white); }
+  .footer-info { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+  @media (max-width: 640px) {
+    nav { padding: 10px 18px; }
+    main { padding: 120px 16px 60px; }
+    .form-card iframe { height: 1200px; }
+    footer { padding: 28px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo-text" href="/">POOF E <span>GONE</span></a>
+  <a class="nav-back" href="/">← Back to site</a>
+</nav>
+
+<main>
+  <div class="page-tag">Baltimore · Secure IT Asset Disposal</div>
+  <h1>REQUEST A <span class="accent">SECURE QUOTE.</span></h1>
+  <p class="page-sub">Fast response, no obligation, no sensitive data required. Fill out the form below and we'll get back to you — or text us directly at (202) 596-1361.</p>
+
+  <div class="form-card">
+    <iframe
+      src="https://poof-e-gone.square.site/get-my-quote#AriDHc"
+      title="Poof E Gone secure quote request form"
+      loading="lazy">
+    </iframe>
+  </div>
+  <p class="form-fallback">Form not loading? <a href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Open it in a new tab</a> instead.</p>
+</main>
+
+<footer>
+  <div class="footer-logo-text">POOF E <span>GONE</span></div>
+  <div class="footer-info">Baltimore, MD &nbsp;·&nbsp; (202) 596-1361 &nbsp;·&nbsp; © 2026 Poof E Gone</div>
+</footer>
+
+</body>
+</html>
