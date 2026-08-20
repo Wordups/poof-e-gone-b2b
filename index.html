@@ -102,6 +102,8 @@
     text-transform: uppercase; text-decoration: none; transition: all 0.2s;
   }
   .hero-vertical-pill:hover { border-color: var(--green); color: var(--green); }
+  .hero-vertical-pill { display: inline-flex; align-items: center; gap: 6px; }
+  .hero-vertical-pill svg { width: 13px; height: 13px; }
 
   .btn-primary {
     background: var(--accent); color: #fff;
@@ -157,7 +159,9 @@
   .service-card.featured { border-top: 3px solid var(--accent); }
   .service-card.featured:hover { border-bottom-color: var(--accent); }
   .service-badge { position: absolute; top: 16px; right: 16px; background: rgba(232,78,15,0.1); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; padding: 4px 8px; text-transform: uppercase; border: 1px solid rgba(232,78,15,0.2); }
-  .service-icon { font-size: 28px; margin-bottom: 14px; }
+  .service-icon { margin-bottom: 14px; color: var(--green); }
+  .service-icon svg { width: 28px; height: 28px; display: block; }
+  .service-card.featured .service-icon { color: var(--accent); }
   .service-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; margin-bottom: 6px; color: var(--white); }
   .service-price { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--green); letter-spacing: 1px; margin-bottom: 10px; text-transform: uppercase; font-weight: 500; }
   .service-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
@@ -181,7 +185,8 @@
   .clients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--border); margin-top: 56px; }
   .client-card { background: var(--card); padding: 36px 28px; transition: all 0.2s; }
   .client-card:hover { background: #faf6ee; }
-  .client-icon { font-size: 28px; margin-bottom: 14px; }
+  .client-icon { margin-bottom: 14px; color: var(--green); }
+  .client-icon svg { width: 28px; height: 28px; display: block; }
   .client-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; margin-bottom: 10px; color: var(--white); }
   .client-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
 
@@ -273,10 +278,10 @@
     <a href="#services" class="btn-ghost">See All Services</a>
   </div>
   <div class="hero-verticals">
-    <a href="dental.html" class="hero-vertical-pill">🦷 Dental Practices</a>
-    <a href="law.html" class="hero-vertical-pill">⚖️ Law Firms</a>
-    <a href="#clients" class="hero-vertical-pill">🏥 Medical Offices</a>
-    <a href="#clients" class="hero-vertical-pill">💼 CPA Firms</a>
+    <a href="dental.html" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4c3.3-1.3 6.7-1.3 10 0 1 3-.5 6-1.5 10-.5 2-1 4-2 4s-1-2.5-1.5-4c-.3-1.2-.7-2-2-2s-1.7.8-2 2c-.5 1.5-.5 4-1.5 4s-1.5-2-2-4C6.5 10 5 7 7 4z"/></svg> Dental Practices</a>
+    <a href="law.html" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M4 7h16"/><path d="M4 7l-2.5 5A3 3 0 0 0 4 15a3 3 0 0 0 2.5-3L4 7zM20 7l-2.5 5a3 3 0 0 0 2.5 3 3 3 0 0 0 2.5-3L20 7z"/></svg> Law Firms</a>
+    <a href="#clients" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg> Medical Offices</a>
+    <a href="#clients" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="1.5"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg> CPA Firms</a>
   </div>
 </section>
 
@@ -316,7 +321,7 @@
   <div class="services-grid">
     <div class="service-card featured">
       <div class="service-badge">Core Offer</div>
-      <div class="service-icon">🔐</div>
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><rect x="9.5" y="11" width="5" height="4" rx="0.8"/><path d="M10.5 11V9.5a1.5 1.5 0 0 1 3 0V11"/></svg></div>
       <div class="service-title">Certified Data Destruction</div>
       <div class="service-price">Per device / batch</div>
       <p class="service-desc">HIPAA-ready data wiping and physical destruction with a Certificate of Destruction issued per job. Compliance documentation included — suitable for audits.</p>
@@ -324,21 +329,21 @@
     </div>
     <div class="service-card featured">
       <div class="service-badge">Core Offer</div>
-      <div class="service-icon">♻️</div>
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.9-4"/><path d="M4 4v5h5"/><path d="M4 13a8 8 0 0 0 14.9 4"/><path d="M20 20v-5h-5"/></svg></div>
       <div class="service-title">IT Asset Pickup &amp; Disposal</div>
       <div class="service-price">Scheduled pickup</div>
       <p class="service-desc">We pick up old laptops, drives, tablets, and servers. No drop-off required. We sort, destroy, and dispose responsibly — you get documentation for every device.</p>
       <div class="service-tags"><span class="service-tag">Mobile</span><span class="service-tag">No minimum</span><span class="service-tag">Baltimore</span></div>
     </div>
     <div class="service-card">
-      <div class="service-icon">🖥️</div>
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.2"/><path d="M8 20h8M12 16v4"/></svg></div>
       <div class="service-title">PC Cleaning &amp; Tune-Up</div>
       <div class="service-price">Starting at $75</div>
       <p class="service-desc">Dust removal, thermal paste refresh, startup optimization, and performance tuning. Your machine runs like new without buying new.</p>
       <div class="service-tags"><span class="service-tag">On-site</span><span class="service-tag">Same-day</span><span class="service-tag">All brands</span></div>
     </div>
     <div class="service-card">
-      <div class="service-icon">🔧</div>
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2-2 2.6-2.6z"/></svg></div>
       <div class="service-title">Hardware Upgrades</div>
       <div class="service-price">Parts + Labor</div>
       <p class="service-desc">RAM upgrades, SSD installs, battery replacements. Extend device life before you spend on a full replacement.</p>
@@ -346,7 +351,7 @@
     </div>
     <div class="service-card featured">
       <div class="service-badge">New</div>
-      <div class="service-icon">🤖</div>
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/></svg></div>
       <div class="service-title">AI Setup &amp; Training</div>
       <div class="service-price">From $99/user · Group sessions from $750</div>
       <p class="service-desc">Remote for solo setups. On-site when your team needs hands-on training. We configure the tools, build the workflows, and make sure your staff actually uses them.</p>
@@ -354,14 +359,14 @@
     </div>
     <div class="service-card featured">
       <div class="service-badge">Retainer</div>
-      <div class="service-icon">📱</div>
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
       <div class="service-title">MDM Management</div>
       <div class="service-price">Retainer — contact for quote</div>
       <p class="service-desc">Full mobile device management for your organization. Intune, Jamf, or MobileIron — compliance policies, app deployment, device enrollment, and ongoing administration.</p>
       <div class="service-tags"><span class="service-tag">Microsoft Intune</span><span class="service-tag">Jamf</span><span class="service-tag">MobileIron</span><span class="service-tag">HIPAA ready</span></div>
     </div>
     <div class="service-card">
-      <div class="service-icon">🦠</div>
+      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
       <div class="service-title">Virus &amp; Malware Removal</div>
       <div class="service-price">Starting at $99</div>
       <p class="service-desc">Full system scan, malware removal, browser cleanup, and security hardening so it doesn't happen again.</p>
@@ -398,32 +403,32 @@
   <h2>BUILT FOR<br>BUSINESSES</h2>
   <div class="clients-grid">
     <div class="client-card" style="cursor:pointer" onclick="window.location.href='dental.html'">
-      <div class="client-icon">🦷</div>
+      <div class="client-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4c3.3-1.3 6.7-1.3 10 0 1 3-.5 6-1.5 10-.5 2-1 4-2 4s-1-2.5-1.5-4c-.3-1.2-.7-2-2-2s-1.7.8-2 2c-.5 1.5-.5 4-1.5 4s-1.5-2-2-4C6.5 10 5 7 7 4z"/></svg></div>
       <div class="client-title">Dental Practices</div>
       <p class="client-desc">HIPAA-compliant data destruction for retired imaging systems, front-desk PCs, and tablets. Certificate of Destruction issued per device.</p>
     </div>
     <div class="client-card" style="cursor:pointer" onclick="window.location.href='law.html'">
-      <div class="client-icon">⚖️</div>
+      <div class="client-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M4 7h16"/><path d="M4 7l-2.5 5A3 3 0 0 0 4 15a3 3 0 0 0 2.5-3L4 7zM20 7l-2.5 5a3 3 0 0 0 2.5 3 3 3 0 0 0 2.5-3L20 7z"/></svg></div>
       <div class="client-title">Law Firms</div>
       <p class="client-desc">Confidential client data on retired devices is a liability. We destroy it, document it, and keep you audit-ready.</p>
     </div>
     <div class="client-card">
-      <div class="client-icon">🏥</div>
+      <div class="client-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
       <div class="client-title">Medical Offices</div>
       <p class="client-desc">HIPAA-ready data destruction plus AI setup for administrative workflows. Documentation provided for every job.</p>
     </div>
     <div class="client-card">
-      <div class="client-icon">🏘️</div>
+      <div class="client-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2M10 21v-4h4v4"/></svg></div>
       <div class="client-title">Property Managers</div>
       <p class="client-desc">Tenant turnover cleanouts, equipment disposal, and office tech refreshes — scheduled on your timeline.</p>
     </div>
     <div class="client-card">
-      <div class="client-icon">💼</div>
+      <div class="client-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="1.5"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></div>
       <div class="client-title">Accountants &amp; CPA Firms</div>
       <p class="client-desc">Secure drive destruction, PC optimization, and AI tools that cut bookkeeping admin time.</p>
     </div>
     <div class="client-card">
-      <div class="client-icon">🖥️</div>
+      <div class="client-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/><path d="M7 7h.01M7 17h.01"/></svg></div>
       <div class="client-title">IT Departments</div>
       <p class="client-desc">Fleet refreshes, MDM deployment, bulk data destruction, and hardware upgrades. We work alongside your team.</p>
     </div>
