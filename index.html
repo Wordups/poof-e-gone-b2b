@@ -112,7 +112,7 @@
     text-transform: uppercase; text-decoration: none; display: inline-block;
     transition: all 0.2s; box-shadow: 0 4px 16px rgba(232,78,15,0.25);
   }
-  .btn-primary:hover { background: var(--accent-dim); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(232,78,15,0.3); }
+  .btn-primary:hover { background: var(--accent-dim); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(232,78,15,0.45); }
   .btn-secondary {
     background: var(--green); color: #fff;
     font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500;
@@ -120,7 +120,7 @@
     text-transform: uppercase; text-decoration: none; display: inline-block;
     transition: all 0.2s; box-shadow: 0 4px 16px rgba(26,122,46,0.2);
   }
-  .btn-secondary:hover { background: var(--green-dim); transform: translateY(-1px); }
+  .btn-secondary:hover { background: var(--green-dim); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(26,122,46,0.35); }
   .btn-ghost {
     background: transparent; color: var(--white);
     font-family: 'DM Mono', monospace; font-size: 13px;
@@ -158,9 +158,9 @@
   /* SERVICES GRID */
   .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border); margin-top: 56px; }
   .service-card { background: var(--card); padding: 36px 28px; transition: all 0.2s; position: relative; overflow: hidden; border-bottom: 3px solid transparent; }
-  .service-card:hover { background: #faf6ee; border-bottom-color: var(--green); }
+  .service-card:hover { background: #faf6ee; border-bottom-color: var(--green); box-shadow: 0 0 0 1px rgba(26,122,46,0.15), 0 8px 24px rgba(26,122,46,0.12); }
   .service-card.featured { border-top: 3px solid var(--accent); }
-  .service-card.featured:hover { border-bottom-color: var(--accent); }
+  .service-card.featured:hover { border-bottom-color: var(--accent); box-shadow: 0 0 0 1px rgba(232,78,15,0.15), 0 8px 24px rgba(232,78,15,0.14); }
   .service-badge { position: absolute; top: 16px; right: 16px; background: rgba(232,78,15,0.1); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; padding: 4px 8px; text-transform: uppercase; border: 1px solid rgba(232,78,15,0.2); }
   .service-icon { margin-bottom: 14px; color: var(--green); }
   .service-icon svg { width: 28px; height: 28px; display: block; }
@@ -187,7 +187,7 @@
   /* CLIENTS GRID */
   .clients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--border); margin-top: 56px; }
   .client-card { background: var(--card); padding: 36px 28px; transition: all 0.2s; }
-  .client-card:hover { background: #faf6ee; }
+  .client-card:hover { background: #faf6ee; box-shadow: 0 0 0 1px rgba(26,122,46,0.15), 0 8px 24px rgba(26,122,46,0.12); }
   .client-icon { margin-bottom: 14px; color: var(--green); }
   .client-icon svg { width: 28px; height: 28px; display: block; }
   .client-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; margin-bottom: 10px; color: var(--white); }
@@ -255,6 +255,8 @@
   h1 { animation: fadeUp 0.6s 0.1s ease both; }
   .hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
   .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
+  .reveal-up { opacity: 0; transform: translateY(24px); }
+  .reveal-up.revealed { animation: fadeUp 0.6s ease both; }
 
   /* STICKY CTA */
   #sticky-cta {
@@ -353,8 +355,8 @@
 </div>
 
 <section id="services">
-  <div class="section-tag">// What We Do</div>
-  <h2>FULL SERVICE<br>MOBILE IT</h2>
+  <div class="section-tag reveal-up">// What We Do</div>
+  <h2 class="reveal-up">FULL SERVICE<br>MOBILE IT</h2>
   <p style="color: var(--muted); font-size: 16px; max-width: 560px;">One visit. Multiple problems solved. We show up with tools, we leave with your tech handled.</p>
   <div class="services-grid">
     <div class="service-card featured">
@@ -425,8 +427,8 @@
 <section class="ai-section" id="ai-setup">
   <div class="ai-box">
     <div>
-      <div class="section-tag">// The Edge Nobody Else Has</div>
-      <div class="ai-title">AFTER CLEANUP,<br>WE HELP YOU <span class="amber">MODERNIZE.</span></div>
+      <div class="section-tag reveal-up">// The Edge Nobody Else Has</div>
+      <div class="ai-title reveal-up">AFTER CLEANUP,<br>WE HELP YOU <span class="amber">MODERNIZE.</span></div>
       <p class="ai-desc">What stays in your office should work smarter. We configure AI tools, deploy device management, and train your team — while we're already there.</p>
       <a class="btn-primary" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener" style="background: var(--accent);">Schedule Secure Pickup</a>
     </div>
@@ -444,8 +446,8 @@
 </section>
 
 <section id="clients">
-  <div class="section-tag">// Who We Serve</div>
-  <h2>BUILT FOR<br>BUSINESSES</h2>
+  <div class="section-tag reveal-up">// Who We Serve</div>
+  <h2 class="reveal-up">BUILT FOR<br>BUSINESSES</h2>
   <div class="clients-grid">
     <div class="client-card" style="cursor:pointer" onclick="window.location.href='dental.html'">
       <div class="client-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4c3.3-1.3 6.7-1.3 10 0 1 3-.5 6-1.5 10-.5 2-1 4-2 4s-1-2.5-1.5-4c-.3-1.2-.7-2-2-2s-1.7.8-2 2c-.5 1.5-.5 4-1.5 4s-1.5-2-2-4C6.5 10 5 7 7 4z"/></svg></div>
@@ -483,8 +485,8 @@
 <div class="divider"></div>
 
 <section id="how-it-works">
-  <div class="section-tag">// Process</div>
-  <h2>HOW IT<br>WORKS</h2>
+  <div class="section-tag reveal-up">// Process</div>
+  <h2 class="reveal-up">HOW IT<br>WORKS</h2>
   <div class="steps">
     <div class="step expandable" onclick="toggleStep(this)">
       <div class="step-num">01</div>
@@ -623,6 +625,16 @@
     });
   }
   initStickyCta();
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.reveal-up').forEach(el => revealObserver.observe(el));
 </script>
 </body>
 </html>
