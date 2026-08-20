@@ -33,10 +33,11 @@
 
   /* NAV */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 16px; left: 16px; right: 16px; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 48px;
-    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
     background: rgba(11,14,20,0.85);
     backdrop-filter: blur(12px);
   }
@@ -50,6 +51,7 @@
     background: var(--accent); color: #fff;
     font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
     letter-spacing: 1px; padding: 10px 22px; border: none; cursor: pointer;
+    border-radius: 999px;
     text-transform: uppercase; text-decoration: none; transition: background 0.2s;
     box-shadow: 0 2px 8px rgba(139,92,246,0.35);
   }
@@ -59,9 +61,30 @@
   .hero {
     min-height: 100vh;
     display: flex; flex-direction: column; justify-content: center;
-    padding: 120px 48px 80px;
+    padding: 140px 48px 80px;
     position: relative; overflow: hidden;
   }
+  .hero-grid { display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: center; }
+  .hero-demo { display: flex; justify-content: center; }
+  .hero-demo-card {
+    width: 100%; max-width: 360px; background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .hero-demo-head { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+  .hero-demo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
+  .hero-demo-row {
+    display: flex; align-items: flex-start; gap: 12px; padding: 14px 0;
+    border-top: 1px solid var(--border);
+    opacity: 0; animation: fadeUp 0.6s ease both;
+  }
+  .hero-demo-check {
+    flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(34,211,238,0.15); color: var(--green);
+    display: flex; align-items: center; justify-content: center; font-size: 12px;
+  }
+  .hero-demo-title { font-size: 14px; color: var(--white); font-weight: 500; }
+  .hero-demo-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } .hero-demo { order: -1; margin-bottom: 32px; } }
   .hero::before {
     content: '';
     position: absolute; top: -100px; right: -100px;
@@ -109,6 +132,7 @@
     background: var(--accent); color: #fff;
     font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500;
     letter-spacing: 1px; padding: 16px 32px; border: none; cursor: pointer;
+    border-radius: 999px;
     text-transform: uppercase; text-decoration: none; display: inline-block;
     transition: all 0.2s; box-shadow: 0 4px 16px rgba(139,92,246,0.3);
   }
@@ -117,6 +141,7 @@
     background: var(--green); color: #fff;
     font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500;
     letter-spacing: 1px; padding: 16px 32px; border: none; cursor: pointer;
+    border-radius: 999px;
     text-transform: uppercase; text-decoration: none; display: inline-block;
     transition: all 0.2s; box-shadow: 0 4px 16px rgba(34,211,238,0.25);
   }
@@ -125,6 +150,7 @@
     background: transparent; color: var(--white);
     font-family: 'DM Mono', monospace; font-size: 13px;
     letter-spacing: 1px; padding: 16px 32px; border: 2px solid var(--border);
+    border-radius: 999px;
     cursor: pointer; text-transform: uppercase; text-decoration: none;
     display: inline-block; transition: all 0.2s;
   }
@@ -185,6 +211,57 @@
   .ai-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(11,14,20,0.8); }
   .ai-list li::before { content: '→'; color: var(--accent); font-family: 'DM Mono', monospace; font-size: 11px; flex-shrink: 0; margin-top: 3px; }
   .ai-list li strong { color: var(--bg); }
+
+  /* PRICING */
+  .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 56px; }
+  @media (max-width: 1100px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .pricing-grid { grid-template-columns: 1fr; } }
+  .price-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 32px 24px; display: flex; flex-direction: column;
+  }
+  .price-card.featured { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 12px 32px rgba(139,92,246,0.15); }
+  .price-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: var(--white); margin-bottom: 8px; }
+  .price-badge {
+    display: inline-block; align-self: flex-start; background: rgba(139,92,246,0.15); color: var(--accent);
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; padding: 4px 8px;
+    text-transform: uppercase; border: 1px solid rgba(139,92,246,0.3); margin-bottom: 12px;
+  }
+  .price-amount { font-family: 'Bebas Neue', sans-serif; font-size: 34px; color: var(--green); margin-bottom: 4px; }
+  .price-period { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; flex-grow: 1; }
+  .price-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--muted); }
+  .price-features li::before { content: '✓'; color: var(--green); font-family: 'DM Mono', monospace; font-size: 12px; flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+  .price-cta { text-align: center; }
+
+  /* FAQ */
+  .faq-list { margin-top: 56px; display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+  .faq-item { background: var(--card); padding: 24px 28px; cursor: pointer; transition: background 0.2s; }
+  .faq-item:hover { background: #1c2230; }
+  .faq-question { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.5px; color: var(--white); }
+  .faq-arrow { font-size: 20px; color: var(--green); font-weight: 300; transition: transform 0.3s; flex-shrink: 0; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; opacity: 0; }
+  .faq-item.open .faq-answer { max-height: 300px; opacity: 1; margin-top: 12px; }
+  .faq-answer p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* TESTIMONIALS */
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
+  @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
+  .testimonial-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .testimonial-quote { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .testimonial-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; color: var(--green); font-size: 14px; }
+  .testimonial-name { font-size: 13px; color: var(--white); font-weight: 600; }
+  .testimonial-role { font-size: 11px; color: var(--muted); }
+  .placeholder-note {
+    text-align: center; margin-top: 24px; font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 1px; color: var(--muted); text-transform: uppercase; opacity: 0.6;
+  }
+
+  /* LOGO STRIP */
+  .logo-strip { margin-top: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: center; opacity: 0.5; }
+  .logo-strip span { font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
 
   /* CLIENTS GRID */
   .clients-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 56px; }
@@ -304,27 +381,61 @@
   </div>
   <div class="nav-links">
     <a href="#services">Services</a>
-    <a href="#ai-setup">AI Setup</a>
+    <a href="#pricing">Pricing</a>
     <a href="#clients">Who We Serve</a>
     <a href="#how-it-works">Process</a>
+    <a href="#faq">FAQ</a>
   </div>
-  <a class="nav-cta" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Schedule Secure Pickup</a>
+  <a class="nav-cta" href="/booking/">Schedule Secure Pickup</a>
 </nav>
 
 <section class="hero">
-  <div class="hero-tag">Baltimore · Secure IT Asset Disposal</div>
-  <h1>YOUR OLD <span class="accent-green">DEVICES</span><br>ARE A <span class="accent-red">LIABILITY.</span><br>WE HANDLE IT.</h1>
-  <p class="hero-sub">Old laptops and hard drives sitting in storage become a compliance risk. We pick them up, destroy the data, and issue a Certificate of Destruction — mobile, same day, no minimums.</p>
-  <p class="hero-text-cta">Fast quote via text: <span>(202) 596-1361</span></p>
-  <div class="hero-actions">
-    <a class="btn-primary" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Schedule Secure Pickup</a>
-    <a href="#services" class="btn-ghost">See All Services</a>
-  </div>
-  <div class="hero-verticals">
-    <a href="dental.html" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4c3.3-1.3 6.7-1.3 10 0 1 3-.5 6-1.5 10-.5 2-1 4-2 4s-1-2.5-1.5-4c-.3-1.2-.7-2-2-2s-1.7.8-2 2c-.5 1.5-.5 4-1.5 4s-1.5-2-2-4C6.5 10 5 7 7 4z"/></svg> Dental Practices</a>
-    <a href="law.html" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M4 7h16"/><path d="M4 7l-2.5 5A3 3 0 0 0 4 15a3 3 0 0 0 2.5-3L4 7zM20 7l-2.5 5a3 3 0 0 0 2.5 3 3 3 0 0 0 2.5-3L20 7z"/></svg> Law Firms</a>
-    <a href="#clients" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg> Medical Offices</a>
-    <a href="#clients" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="1.5"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg> CPA Firms</a>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-tag">Baltimore · Secure IT Asset Disposal</div>
+      <h1>YOUR OLD <span class="accent-green">DEVICES</span><br>ARE A <span class="accent-red">LIABILITY.</span><br>WE HANDLE IT.</h1>
+      <p class="hero-sub">Old laptops and hard drives sitting in storage become a compliance risk. We pick them up, destroy the data, and issue a Certificate of Destruction — mobile, same day, no minimums.</p>
+      <p class="hero-text-cta">Fast quote via text: <span>(202) 596-1361</span></p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="/booking/">Schedule Secure Pickup</a>
+        <a href="#services" class="btn-ghost">See All Services</a>
+      </div>
+      <div class="hero-verticals">
+        <a href="dental.html" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4c3.3-1.3 6.7-1.3 10 0 1 3-.5 6-1.5 10-.5 2-1 4-2 4s-1-2.5-1.5-4c-.3-1.2-.7-2-2-2s-1.7.8-2 2c-.5 1.5-.5 4-1.5 4s-1.5-2-2-4C6.5 10 5 7 7 4z"/></svg> Dental Practices</a>
+        <a href="law.html" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M4 7h16"/><path d="M4 7l-2.5 5A3 3 0 0 0 4 15a3 3 0 0 0 2.5-3L4 7zM20 7l-2.5 5a3 3 0 0 0 2.5 3 3 3 0 0 0 2.5-3L20 7z"/></svg> Law Firms</a>
+        <a href="#clients" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg> Medical Offices</a>
+        <a href="#clients" class="hero-vertical-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="1.5"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg> CPA Firms</a>
+      </div>
+    </div>
+    <div class="hero-demo" aria-hidden="true">
+      <div class="hero-demo-card">
+        <div class="hero-demo-head">
+          <span class="hero-demo-dot"></span>
+          <span>Live Job Status</span>
+        </div>
+        <div class="hero-demo-row" style="animation-delay:0.2s">
+          <span class="hero-demo-check">✓</span>
+          <div>
+            <div class="hero-demo-title">Pickup Confirmed</div>
+            <div class="hero-demo-sub">Baltimore, MD · Today</div>
+          </div>
+        </div>
+        <div class="hero-demo-row" style="animation-delay:0.6s">
+          <span class="hero-demo-check">✓</span>
+          <div>
+            <div class="hero-demo-title">Device Logged</div>
+            <div class="hero-demo-sub">4 laptops · 2 drives</div>
+          </div>
+        </div>
+        <div class="hero-demo-row" style="animation-delay:1.0s">
+          <span class="hero-demo-check">✓</span>
+          <div>
+            <div class="hero-demo-title">Certificate Issued</div>
+            <div class="hero-demo-sub">Delivered same day</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -434,7 +545,7 @@
       <div class="section-tag reveal-up">// The Edge Nobody Else Has</div>
       <div class="ai-title reveal-up">AFTER CLEANUP,<br>WE HELP YOU <span class="amber">MODERNIZE.</span></div>
       <p class="ai-desc">What stays in your office should work smarter. We configure AI tools, deploy device management, and train your team — while we're already there.</p>
-      <a class="btn-primary" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener" style="background: var(--accent);">Schedule Secure Pickup</a>
+      <a class="btn-primary" href="/booking/" style="background: var(--accent);">Schedule Secure Pickup</a>
     </div>
     <div>
       <ul class="ai-list">
@@ -447,6 +558,110 @@
       </ul>
     </div>
   </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="pricing">
+  <div class="section-tag reveal-up">// Pricing</div>
+  <h2 class="reveal-up">PLANS FOR<br>EVERY VISIT</h2>
+  <p style="color: var(--muted); font-size: 16px; max-width: 560px;">Pay per job, or set up a retainer once you know you'll need us regularly. No hidden fees.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Single Service</div>
+      <div class="price-amount">$75+</div>
+      <div class="price-period">Per job, no minimum</div>
+      <ul class="price-features">
+        <li>PC cleaning, tune-up, malware removal</li>
+        <li>Certified data destruction, per device</li>
+        <li>Hardware upgrades, parts + labor</li>
+        <li>Mobile — we come to you</li>
+      </ul>
+      <a class="btn-ghost price-cta" href="/booking/">Get a Quote</a>
+    </div>
+    <div class="price-card">
+      <div class="price-name">AI Setup</div>
+      <div class="price-amount">$99+</div>
+      <div class="price-period">Per user, remote or on-site</div>
+      <ul class="price-features">
+        <li>Remote setup — $99–$149/user</li>
+        <li>On-site per user — $149–$199/user</li>
+        <li>Group session — $750–$999 flat, up to 10</li>
+        <li>ChatGPT, Copilot, automation workflows</li>
+      </ul>
+      <a class="btn-ghost price-cta" href="/booking/">Get a Quote</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-name">Monthly Retainer</div>
+      <div class="price-amount">$199+</div>
+      <div class="price-period">Per month</div>
+      <ul class="price-features">
+        <li>MDM management — Intune, Jamf, MobileIron</li>
+        <li>Ongoing AI tooling support</li>
+        <li>New-hire device enrollment</li>
+        <li>Priority scheduling</li>
+      </ul>
+      <a class="btn-primary price-cta" href="/booking/">Get a Quote</a>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Custom Bundle</div>
+      <div class="price-amount">Contact Us</div>
+      <div class="price-period">Multi-service, one visit</div>
+      <ul class="price-features">
+        <li>Combine any services above</li>
+        <li>One scheduled visit</li>
+        <li>Scoped to your actual needs</li>
+        <li>No obligation quote</li>
+      </ul>
+      <a class="btn-ghost price-cta" href="/booking/">Get a Quote</a>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="section-tag reveal-up">// What Clients Say</div>
+  <h2 class="reveal-up">TRUSTED BY<br>BALTIMORE BUSINESSES</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <p class="testimonial-quote">"Placeholder testimonial copy — swap for a real quote once we have one. Kept short and specific to the service used."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">PD</div>
+        <div>
+          <div class="testimonial-name">Placeholder Name</div>
+          <div class="testimonial-role">Placeholder Title, Placeholder Practice</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <p class="testimonial-quote">"Placeholder testimonial copy — swap for a real quote once we have one. Kept short and specific to the service used."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">PD</div>
+        <div>
+          <div class="testimonial-name">Placeholder Name</div>
+          <div class="testimonial-role">Placeholder Title, Placeholder Firm</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <p class="testimonial-quote">"Placeholder testimonial copy — swap for a real quote once we have one. Kept short and specific to the service used."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">PD</div>
+        <div>
+          <div class="testimonial-name">Placeholder Name</div>
+          <div class="testimonial-role">Placeholder Title, Placeholder Office</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="logo-strip">
+    <span>Placeholder Client Co.</span>
+    <span>Placeholder Practice Group</span>
+    <span>Placeholder Firm LLP</span>
+    <span>Placeholder CPA Group</span>
+    <span>Placeholder Properties</span>
+  </div>
+  <p class="placeholder-note">Placeholder content — real reviews and clients coming soon</p>
 </section>
 
 <section id="clients">
@@ -557,13 +772,42 @@
 
 <div class="divider"></div>
 
+<section id="faq">
+  <div class="section-tag reveal-up">// FAQ</div>
+  <h2 class="reveal-up">COMMON<br>QUESTIONS</h2>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">What areas do you serve?<span class="faq-arrow">+</span></div>
+      <div class="faq-answer"><p>Baltimore metro, Towson, and Howard County. If you're just outside that area, text us and we'll let you know if we can make it work.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">Is there a minimum number of devices?<span class="faq-arrow">+</span></div>
+      <div class="faq-answer"><p>No minimum. We'll come out for a single laptop or a full office cleanout.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">How fast is turnaround?<span class="faq-arrow">+</span></div>
+      <div class="faq-answer"><p>Same-day service is available depending on scheduling. Certificates of Destruction are issued the same day a job completes.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">What's actually in a Certificate of Destruction?<span class="faq-arrow">+</span></div>
+      <div class="faq-answer"><p>Device type, destruction method, chain-of-custody confirmation, and the date completed — issued per device or per batch, suitable for HIPAA, legal, and financial compliance documentation.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">Can AI setup be done fully remote?<span class="faq-arrow">+</span></div>
+      <div class="faq-answer"><p>Yes — solo setups are usually handled remote via screen share, same day. On-site is available when your team needs hands-on training instead.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <section>
   <div class="compliance-box">
     <div>
       <div class="section-tag">// Why It Matters</div>
       <div class="compliance-title">DATA <span class="accent">LIABILITY</span> IS REAL.</div>
       <p class="compliance-desc">Improperly disposed electronics are one of the most common sources of data breaches for small businesses. A Certificate of Destruction is your proof you handled it correctly — and we bring it to your door.</p>
-      <a class="btn-primary" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Schedule Secure Pickup</a>
+      <a class="btn-primary" href="/booking/">Schedule Secure Pickup</a>
     </div>
     <div>
       <ul class="cert-list">
@@ -602,7 +846,7 @@
 
 <div id="sticky-cta">
   <span>Old devices piling up?</span>
-  <a class="btn-primary" href="https://poof-e-gone.square.site/get-my-quote#AriDHc" target="_blank" rel="noopener">Schedule Secure Pickup</a>
+  <a class="btn-primary" href="/booking/">Schedule Secure Pickup</a>
   <button type="button" aria-label="Dismiss" onclick="dismissStickyCta()">×</button>
 </div>
 
@@ -610,6 +854,12 @@
   function toggleStep(el) {
     const isOpen = el.classList.contains('open');
     document.querySelectorAll('.expandable').forEach(s => s.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+
+  function toggleFaq(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(s => s.classList.remove('open'));
     if (!isOpen) el.classList.add('open');
   }
 
